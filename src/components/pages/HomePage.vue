@@ -1,22 +1,32 @@
 
 <script>
 import axios from 'axios';
+import {store} from '../../store.js';
+
 export default{
   data() {
     return {
-      apartments: [],
+      // apartments: [],
       baseApiUrl: 'http://127.0.0.1:8000/api/',
+      store,
       
     }
   },
   mounted() {
     axios.get(this.baseApiUrl + 'apartments').then(res => {
-      console.log(res);
-    this.apartments = res.data.results;
+      store.apartments = res.data.results;
+    // store.appartmentsAddress = 
+
+      store.apartments.forEach(element => {
+
+      const item = element.address;
+
+      store.apartmentsAddress.push(item)
+
+      
+    });
 
     })
-    
-    
     
   },
   methods: {
@@ -28,7 +38,7 @@ export default{
 <template>
   <div id="app" class="container mt-5">
     <div class="row">
-      <div class="col-md-4 mb-4" v-for="apartment in apartments">
+      <div class="col-md-4 mb-4" v-for="apartment in store.apartments">
         <div class="card ">
           <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="card-img-top"  alt="Listing Image">
           <div class="card-body">

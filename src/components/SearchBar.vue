@@ -7,7 +7,8 @@ export default {
     data() {
         return {
             store,
-            listItem: []
+            listItem: [],
+            input: '',
         };
     },
 
@@ -34,9 +35,37 @@ export default {
         },
 
         chooseAddress(item){
-            store.inputSearch = item
-        }
-    },
+
+            store.inputSearch = item;
+
+            console.log(store.inputSearch)
+
+
+
+            // this.input = store.inputSearch
+
+            // console.log(store.inputSearch.toLowerCase())
+            // console.log(store.apartments)
+
+            // axios.get('http://127.0.0.1:8000/api/apartments').then(res => {
+            // store.apartments = res.data.results});
+
+            
+            
+            
+        },
+        prova(){
+
+            // console.log("al click",store.inputSearch.toLowerCase())
+            console.log(store.apartments[0])
+                    
+                        
+        //     store.apartments = store.apartments.filter(apartment =>
+        //     apartment.address.toLowerCase().includes(store.inputSearch.toLowerCase())
+        // );
+    }
+},
+
 }
 </script>
 
@@ -60,14 +89,15 @@ export default {
                         <input class="form-control" type="search" v-model="store.inputSearch" placeholder="Filtra progetti..." @keyup="apiCall(store.inputSearch)">
                     </div>
                     <div>
-                        <ul>
-                            <li v-for="item in this.listItem" @click="chooseAddress(item)">{{ item }}</li>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action" v-for="item in this.listItem" @click="chooseAddress(item)">{{ item }}</li>
                         </ul>
                     </div>
 
                 </div>
             </nav>
         </div>
+        <div @click="prova()">prova</div>
     </header>
 
 </template>

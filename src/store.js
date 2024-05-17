@@ -4,7 +4,10 @@ export const store = reactive({
 
     inputSearch: '',
     addresses: [],
-    filteredAddresses: [],
+    apartmentsAddress: [],
+
+    apartments: [],
+
 
 
 
