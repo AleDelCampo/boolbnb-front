@@ -30,7 +30,7 @@ export default{
     <div class="row">
       <div class="col-md-4 mb-4" v-for="apartment in apartments">
         <div class="card ">
-          <img :src="apartment.image" class="card-img-top"  alt="Listing Image">
+          <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="card-img-top"  alt="Listing Image">
           <div class="card-body">
             <h5 class="card-title">{{ apartment.title }}</h5>
             <p class="card-text">{{ apartment.description }}</p>

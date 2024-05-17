@@ -30,6 +30,7 @@ export default {
         console.error('Error fetching apartment details:', error);
         // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
       });
+      console.log(this.apartment);
   }
 }
 </script>
@@ -40,24 +41,24 @@ export default {
       <div class="row">
         <!-- Immagine -->
         <div class="col-md-6 mb-4">
-            <div v-if="apartment.image" class="position-relative overflow-hidden border border-success rounded">
-                <div class="single-image">
-                    <img :src="apartment.image" class="img-fluid" alt="Cover Image">
-                    
-                <div class="mask "></div>
-                
+            <div  class="position-relative overflow-hidden border border-success rounded">
+              <div class="single-image">
+                  <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
+                  
+              <div class="mask "></div>
+              
             </div>
             
         </div>     
 
-            <div v-else class="border border-danger rounded p-3">
+            <!-- <div v-else class="border border-danger rounded p-3">
                 No image
             </div>
             <div class="py-4">
                 <router-link :to="{name: 'HomePage'}" class="btn btn-outline-light text-uppercase fw-bold" >
                         Back Home
                 </router-link>
-            </div>
+            </div> -->
            
         </div>
 

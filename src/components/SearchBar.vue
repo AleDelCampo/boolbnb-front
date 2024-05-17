@@ -7,11 +7,14 @@ export default {
     data() {
         return {
             store,
+            listItem: []
         };
     },
 
     methods: {
         apiCall(){
+
+            this.listItem = []
 
 
             axios.get('https://api.tomtom.com/search/2/geocode/'+ store.inputSearch +'.json?key=N4I4VUaeK36jrRC3vR5FfWqJS6fP6oTY&limit=3').then(res=>{
@@ -20,6 +23,18 @@ export default {
                 // console.log(store.addresses[0].address.freeformAddress);
             })
 
+            store.addresses.forEach(element => {
+
+                const item = element.address.freeformAddress;
+
+                this.listItem.push(item)
+                
+            });
+
+        },
+
+        chooseAddress(item){
+            store.inputSearch = item
         }
     },
 }
@@ -43,6 +58,11 @@ export default {
 
                     <div>
                         <input class="form-control" type="search" v-model="store.inputSearch" placeholder="Filtra progetti..." @keyup="apiCall(store.inputSearch)">
+                    </div>
+                    <div>
+                        <ul>
+                            <li v-for="item in this.listItem" @click="chooseAddress(item)">{{ item }}</li>
+                        </ul>
                     </div>
 
                 </div>
