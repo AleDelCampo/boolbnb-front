@@ -1,5 +1,6 @@
 <script>
 import {store} from '../store.js';
+import axios from 'axios';
 
 export default {
     name: 'SearchBar',
@@ -7,6 +8,19 @@ export default {
         return {
             store,
         };
+    },
+
+    methods: {
+        apiCall(){
+
+
+            axios.get('https://api.tomtom.com/search/2/geocode/'+ store.inputSearch +'.json?key=N4I4VUaeK36jrRC3vR5FfWqJS6fP6oTY&limit=3').then(res=>{
+              
+                store.addresses = res.data.results
+                // console.log(store.addresses[0].address.freeformAddress);
+            })
+
+        }
     },
 }
 </script>
@@ -28,7 +42,7 @@ export default {
                     </div>
 
                     <div>
-                        <input class="form-control" type="search" v-model="store.filterQuery" placeholder="Filtra progetti..." @keyup="applyFilter(store.filterQuery)">
+                        <input class="form-control" type="search" v-model="store.inputSearch" placeholder="Filtra progetti..." @keyup="apiCall(store.inputSearch)">
                     </div>
 
                 </div>
