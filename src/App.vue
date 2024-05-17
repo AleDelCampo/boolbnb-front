@@ -1,6 +1,7 @@
 <script>
 
 import AppHeader from './components/AppHeader.vue';
+import SearchBar from './components/SearchBar.vue';
 
 
 
@@ -17,6 +18,7 @@ export default {
 
   components: {
     AppHeader,
+    SearchBar,
       
   },
 }
@@ -24,7 +26,7 @@ export default {
 
 <template>
   <AppHeader></AppHeader>
-  
+  <SearchBar></SearchBar>
   <router-view></router-view>
 
 </template>
