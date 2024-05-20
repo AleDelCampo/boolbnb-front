@@ -5,9 +5,6 @@ import SearchBar from './components/SearchBar.vue';
 import AppFooter from './components/AppFooter.vue';
 import Jumbo from './components/Jumbo.vue';
 
-
-
-
 export default {
   data() {
     return {
@@ -23,19 +20,15 @@ export default {
     SearchBar,
     AppFooter,
     Jumbo
-      
+
   },
 }
 </script>
 
 <template>
   <AppHeader></AppHeader>
-  <Jumbo></Jumbo>
-  <SearchBar></SearchBar>
   <router-view></router-view>
   <AppFooter></AppFooter>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

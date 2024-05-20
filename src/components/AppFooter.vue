@@ -23,7 +23,7 @@ export default {
                 },
                 {
                     nome: "Pool",
-                    cognome: "Gutirrez"
+                    cognome: "Gutierrez"
                 },
             ],
 
@@ -55,9 +55,9 @@ export default {
         <div class="container py-5">
 
 
-            <div id="footer-title">
+            <!-- <div id="footer-title">
                 BoolBnB
-            </div>
+            </div> -->
 
             <div class="d-flex justify-content-between">
 
@@ -115,7 +115,7 @@ export default {
 
         <div class="container py-4">
             <h6 class="text-center mb-3">
-                Progetto finale di gruppo Boolean®, BoolBnB.
+                Progetto finale di gruppo Boolean®, <span style="color: #006769c0;">BoolBnB</span>.
             </h6>
 
             <div id="copyright">
@@ -191,7 +191,6 @@ footer {
 .components {
     li {
         font-size: 1.2em;
-        cursor: pointer;
 
         a {
             color: white;
@@ -212,7 +211,6 @@ ul {
     font-size: .8em;
     list-style-type: none;
     opacity: .8;
-    cursor: pointer;
 }
 
 hr {

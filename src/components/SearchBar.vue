@@ -1,12 +1,12 @@
 <script>
-import { store } from '../store'; 
-import axios from 'axios'; 
+import { store } from '../store';
+import axios from 'axios';
 
 export default {
   name: 'SearchBar',
   data() {
     return {
-      store, 
+      store,
       listItem: [], // Lista per i suggerimenti di autocompletamento
       showDropdown: false, // Controlla la visibilità del menu a cascata della ricerca
     };
@@ -52,13 +52,13 @@ export default {
         axios.get('http://127.0.0.1:8000/api/search', {
           params: { latitude: this.latitude, longitude: this.longitude }
         })
-        .then(res => {
-          // Memorizza i risultati degli appartamenti nello store
-          this.store.apartments = res.data.results;
-        })
-        .catch(error => {
-          console.error('Errore durante la ricerca degli appartamenti:', error);
-        });
+          .then(res => {
+            // Memorizza i risultati degli appartamenti nello store
+            this.store.apartments = res.data.results;
+          })
+          .catch(error => {
+            console.error('Errore durante la ricerca degli appartamenti:', error);
+          });
       }
     }
   }
@@ -71,41 +71,63 @@ export default {
     <pre>{{ store }}</pre> Mostra lo stato dello store in formato JSON 
      </div> -->
 
-    <div class="container">
-      <nav class="navbar">
-        <div class="container-fluid d-flex justify-content-between">
-          
-          
-          <!-- Sezione per l'input di ricerca con menu a cascata -->
-          <div class="position-relative">
-            <!-- Campo di input per la ricerca di indirizzi -->
-            <input class="form-control" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..." 
-              @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
-            
-            <!-- Lista di suggerimenti mostrata come un menu a cascata -->
-            <ul class="list-group position-absolute w-100"  v-show="showDropdown">
-              <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
-              <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item" @mousedown="chooseAddress(item)">
-                {{ item }} <!-- Visualizza il suggerimento di indirizzo -->
-              </li>
-            </ul>
-          </div>
+  <div class="container d-flex justify-content-center">
+    <nav class="navbar search-bar">
+      <div class="container-fluid">
+        <!-- Sezione per l'input di ricerca con menu a cascata -->
+        <div class="position-relative">
+          <!-- Campo di input per la ricerca di indirizzi -->
+          <input class="form-control ms-2 bord" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..."
+            @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
+
+          <!-- Lista di suggerimenti mostrata come un menu a cascata -->
+          <ul class="list-group position-absolute w-100" v-show="showDropdown">
+            <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
+            <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item"
+              @mousedown="chooseAddress(item)">
+              {{ item }} <!-- Visualizza il suggerimento di indirizzo -->
+            </li>
+          </ul>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <style>
-
-
 /* Stile per posizionare gli elementi in modo assoluto rispetto al loro contenitore */
-.position-absolute {
- 
+.position-relative {
   z-index: 1000;
+}
+
+.bord {
+  border-color: #006769c0;
 }
 
 /* Stile per gli elementi della lista di suggerimenti, cambiando il cursore su pointer */
 .list-group-item {
+  cursor: pointer;
+}
+
+.search-bar {
+  border-radius: 12px;
+  width: 50%;
+  position: relative;
+  bottom: 28px;
+}
+
+.navbar .form-control:focus {
+  background-color: #ffffff;
+  color: black;
+  border-color: #006769c0;
+  box-shadow: 0 0 6px #006769c0;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23006769c0"%3E%3Cpath d="M0 0h24v24H0z" fill="none"/%3E%3Cpath d="M12 10.585l4.95-4.95 1.415 1.414L13.414 12l4.95 4.95-1.415 1.414L12 13.414l-4.95 4.95-1.414-1.414L10.585 12l-4.95-4.95 1.414-1.414L12 10.585z"/%3E%3C/svg%3E') no-repeat center;
   cursor: pointer;
 }
 </style>
