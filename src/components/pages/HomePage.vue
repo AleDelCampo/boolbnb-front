@@ -47,8 +47,8 @@ export default{
           <div class="card-body">
             <h5 class="card-title">{{ apartment.title }}</h5>
             <p class="card-text">{{ apartment.description }}</p>
-            <router-link :to="{name: 'single-apartment', params:{slug:apartment.slug}}" class="btn btn-outline-secondary text-uppercase fw-bold" >
-              View Details
+            <router-link :to="{name: 'single-apartment', params:{slug:apartment.slug}}" class="btn btn-outline-light text-uppercase fw-bold" >
+              Vedi Dettagli
             </router-link>
             <!-- <a href="" class="btn btn-outline-primary">View Details</a> -->
           </div>
@@ -58,11 +58,11 @@ export default{
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+
 .card {
-  height: 100%; /* Imposta l'altezza di tutte le card al 100% */
+  height: 100%;
+  background-color: #006769c0;
 }
-
-
 
 </style>
