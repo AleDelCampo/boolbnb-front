@@ -2,6 +2,7 @@
 
 import AppHeader from './components/AppHeader.vue';
 import SearchBar from './components/SearchBar.vue';
+import AppFooter from './components/AppFooter.vue';
 
 
 
@@ -19,6 +20,7 @@ export default {
   components: {
     AppHeader,
     SearchBar,
+    AppFooter,
       
   },
 }
@@ -28,7 +30,7 @@ export default {
   <AppHeader></AppHeader>
   <SearchBar></SearchBar>
   <router-view></router-view>
-
+  <AppFooter></AppFooter>
 </template>
 
 <style lang="scss" scoped>
