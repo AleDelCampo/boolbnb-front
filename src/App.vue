@@ -2,6 +2,7 @@
 
 import AppHeader from './components/AppHeader.vue';
 import SearchBar from './components/SearchBar.vue';
+import Jumbo from './components/Jumbo.vue';
 
 
 
@@ -19,6 +20,7 @@ export default {
   components: {
     AppHeader,
     SearchBar,
+    Jumbo
       
   },
 }
@@ -26,6 +28,7 @@ export default {
 
 <template>
   <AppHeader></AppHeader>
+  <Jumbo></Jumbo>
   <SearchBar></SearchBar>
   <router-view></router-view>
 

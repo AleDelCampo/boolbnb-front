@@ -3,7 +3,14 @@
 import axios from 'axios';
 import {store} from '../../store.js';
 
+import Jumbo from '../Jumbo.vue';
+
 export default{
+
+  component:{
+    Jumbo
+  },
+
   data() {
     return {
       // apartments: [],
