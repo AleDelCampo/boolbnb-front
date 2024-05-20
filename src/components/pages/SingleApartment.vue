@@ -40,25 +40,25 @@ export default {
       <div class="row">
         <!-- Immagine -->
         <div class="col-md-6 mb-4">
-            <div v-if="apartment.image" class="position-relative overflow-hidden border border-success rounded">
-                <div class="single-image">
-                    <img :src="apartment.image" class="img-fluid" alt="Cover Image">
-                    
-                <div class="mask "></div>
-                
-            </div>
-            
-        </div>     
+          <div v-if="apartment.image" class="position-relative overflow-hidden border-color rounded">
+            <div class="single-image">
+              <img :src="apartment.image" class="img-fluid" alt="Cover Image">
 
-            <div v-else class="border border-danger rounded p-3">
-                No image
+              <div class="mask "></div>
+
             </div>
-            <div class="py-4">
-                <router-link :to="{name: 'HomePage'}" class="btn btn-outline-light text-uppercase fw-bold" >
-                        Back Home
-                </router-link>
-            </div>
-           
+
+          </div>
+
+          <div v-else class="border border-danger rounded p-3">
+            No image
+          </div>
+          <div class="py-4">
+            <router-link :to="{ name: 'HomePage' }" class="btn btn-outline-light text-uppercase fw-bold">
+              Back Home
+            </router-link>
+          </div>
+
         </div>
 
         <!-- Dettagli appartamento -->
@@ -67,29 +67,30 @@ export default {
             <h2>{{ apartment.title }}</h2>
 
             <div v-if="apartment.user">
-                <p><strong class="text-warning">Owner: </strong>{{ apartment.user.name }}</p>
+              <p><strong class="text">Owner: </strong>{{ apartment.user.name }}</p>
             </div>
-            <p v-else><strong class="text-warning">Owner:</strong> No owner information available</p>
+            <p v-else><strong class="text">Owner:</strong> No owner information available</p>
             <p>{{ apartment.description }}</p>
 
             <h3>Details</h3>
-            <p><strong class="text-warning">Num. of Rooms: </strong>{{ apartment.n_rooms }}</p>
-            <p><strong class="text-warning">Num. of Beds: </strong>{{ apartment.n_beds }}</p>
-            <p><strong class="text-warning">Num. of Bathrooms: </strong>{{ apartment.n_bathrooms }}</p>
-            <p><strong class="text-warning">SQM Apartment: </strong>{{ apartment.squared_meters }}</p>
+            <p><strong class="text">Num. of Rooms: </strong>{{ apartment.n_rooms }}</p>
+            <p><strong class="text">Num. of Beds: </strong>{{ apartment.n_beds }}</p>
+            <p><strong class="text">Num. of Bathrooms: </strong>{{ apartment.n_bathrooms }}</p>
+            <p><strong class="text">SQM Apartment: </strong>{{ apartment.squared_meters }}</p>
 
-            <p><strong class="text-warning">Address: </strong>{{ apartment.address }}</p>
+            <p><strong class="text">Address: </strong>{{ apartment.address }}</p>
 
-            
-            <div v-if="apartment.services && apartment.services.length !== 0" >
-                <strong class="text-warning">Services</strong><span v-for="service in apartment.services" >{{ service.name }}</span>
+
+            <div v-if="apartment.services && apartment.services.length !== 0">
+              <strong class="text">Services</strong><span v-for="service in apartment.services">{{ service.name
+                }}</span>
             </div>
-            <p v-else><strong class="text-warning">Services:</strong> No extra services</p>
+            <p v-else><strong class="text">Services:</strong> No extra services</p>
 
           </div>
         </div>
       </div>
-      
+
     </div>
 
     <!-- Caricamento -->
@@ -98,18 +99,23 @@ export default {
         <span class="visually-hidden text-white">Loading...</span>
       </div>
     </div>
-   
+
   </div>
 
 </template>
 
 
 <style lang="scss">
-.single-image{
-    object-fit:cover; 
-    height: 300px;
-
+.single-image {
+  object-fit: cover;
+  height: 300px;
 }
 
+.border-color {
+  border: 1px solid #006769c0;
+}
 
+.text {
+  color: #006769c0;
+}
 </style>
