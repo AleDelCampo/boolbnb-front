@@ -13,20 +13,23 @@ export default{
     }
   },
   mounted() {
-    axios.get(this.baseApiUrl + 'apartments').then(res => {
-      store.apartments = res.data.results;
-    // store.appartmentsAddress = 
 
-      store.apartments.forEach(element => {
+    // da eliminare
+    
+    // axios.get(this.baseApiUrl + 'apartments').then(res => {
+    //   store.apartments = res.data.results;
+    // // store.appartmentsAddress = 
 
-      const item = element.address;
+    //   store.apartments.forEach(element => {
 
-      store.apartmentsAddress.push(item)
+    //   const item = element.address;
+
+    //   store.apartmentsAddress.push(item)
 
       
-    });
+    // });
 
-    })
+    // })
     
   },
   methods: {
