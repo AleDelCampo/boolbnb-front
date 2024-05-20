@@ -39,8 +39,8 @@ export default {
                 <div id="reg-log">
                 
                     <div id="reg-log-inner">
-                        <a href="">Accedi</a>
-                        <a href="">Registrati</a>
+                        <a href="http://127.0.0.1:8000/login">Accedi</a>
+                        <a href="http://127.0.0.1:8000/register">Registrati</a>
                     </div>
                 
                 </div>
