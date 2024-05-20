@@ -1,107 +1,111 @@
 <script>
-import {store} from '../store.js';
-import axios from 'axios';
+import { store } from '../store'; 
+import axios from 'axios'; 
 
 export default {
-    name: 'SearchBar',
-    data() {
-        return {
-            store,
-            listItem: [],
-            input: '',
-        };
+  name: 'SearchBar',
+  data() {
+    return {
+      store, 
+      listItem: [], // Lista per i suggerimenti di autocompletamento
+      showDropdown: false, // Controlla la visibilità del menu a cascata della ricerca
+    };
+  },
+  methods: {
+    // Metodo per chiamare l'API di TomTom e ottenere suggerimenti di indirizzi basati sull'input dell'utente
+    apiCall() {
+      // Reset della lista di suggerimenti
+      this.listItem = [];
+      // Componi l'URL per l'API di TomTom utilizzando la chiave e l'input dell'utente
+      axios.get('https://api.tomtom.com/search/2/geocode/' + this.store.inputSearch + '.json?key=N4I4VUaeK36jrRC3vR5FfWqJS6fP6oTY&limit=3')
+        .then(res => {
+          // Memorizza i risultati dell'API nello store
+          this.store.addresses = res.data.results;
+          // Aggiungi ogni indirizzo ottenuto dalla risposta API alla lista di suggerimenti
+          this.store.addresses.forEach(element => {
+            this.listItem.push(element.address.freeformAddress);
+          });
+          // Mostra il dmenu a cascata se ci sono suggerimenti nella lista
+          this.showDropdown = this.listItem.length > 0;
+        })
+        .catch(error => {
+          console.error('Errore durante il geocoding:', error);
+        });
     },
-
-    methods: {
-        apiCall(){
-
-            this.listItem = []
-
-
-            axios.get('https://api.tomtom.com/search/2/geocode/'+ store.inputSearch +'.json?key=N4I4VUaeK36jrRC3vR5FfWqJS6fP6oTY&limit=3').then(res=>{
-              
-                store.addresses = res.data.results
-                // console.log(store.addresses[0].address.freeformAddress);
-            })
-
-            store.addresses.forEach(element => {
-
-                const item = element.address.freeformAddress;
-
-                this.listItem.push(item)
-                
-            });
-
-        },
-
-        chooseAddress(item){
-
-            store.inputSearch = item;
-
-            console.log(store.inputSearch)
-
-
-
-            // this.input = store.inputSearch
-
-            // console.log(store.inputSearch.toLowerCase())
-            // console.log(store.apartments)
-
-            // axios.get('http://127.0.0.1:8000/api/apartments').then(res => {
-            // store.apartments = res.data.results});
-
-            
-            
-            
-        },
-        prova(){
-
-            // console.log("al click",store.inputSearch.toLowerCase())
-            console.log(store.apartments[0])
-                    
-                        
-        //     store.apartments = store.apartments.filter(apartment =>
-        //     apartment.address.toLowerCase().includes(store.inputSearch.toLowerCase())
-        // );
+    // Metodo per scegliere un indirizzo dai suggerimenti e cercare appartamenti vicini
+    chooseAddress(item) {
+      // Imposta l'input di ricerca con l'elemento selezionato
+      this.store.inputSearch = item;
+      // Nasconde il menù
+      this.showDropdown = false;
+      // Trova l'indirizzo selezionato nella lista degli indirizzi memorizzati
+      const selectedAddress = this.store.addresses.find(address => {
+        // Verifica se l'indirizzo corrente ha lo stesso freeformAddress di item
+        return address.address.freeformAddress === item;
+      });
+      // Se è stato trovato un indirizzo corrispondente in addresses
+      if (selectedAddress) {
+        // Ottieni latitudine e longitudine dell'indirizzo selezionato
+        this.latitude = selectedAddress.position.lat;
+        this.longitude = selectedAddress.position.lon;
+        // Esegui una richiesta GET alla tua API per cercare appartamenti vicini
+        axios.get('http://127.0.0.1:8000/api/search', {
+          params: { latitude: this.latitude, longitude: this.longitude }
+        })
+        .then(res => {
+          // Memorizza i risultati degli appartamenti nello store
+          this.store.apartments = res.data.results;
+        })
+        .catch(error => {
+          console.error('Errore durante la ricerca degli appartamenti:', error);
+        });
+      }
     }
-},
-
-}
+  }
+};
 </script>
 
-
 <template>
+  <!-- Visualizzazione dello store stampato sulla pagina per debugging
+  <div>
+    <pre>{{ store }}</pre> Mostra lo stato dello store in formato JSON 
+     </div> -->
 
-<header class="bg-body-tertiary">
-        <div class="container">
-            <nav class="navbar">
-                <div class="container-fluid d-flex justify-content-between">
-
-                    <a href="#">
-                        <!-- <router-link :to="{ name: 'home' }"><img src="https://fontmeme.com/permalink/240430/990fbe74ade8eac19477253ccd13ab23.png" alt="casper-font" border="0"></router-link> -->
-                    </a>
-
-                    <div>
-                        <!-- <router-link :to="{ name: 'contact-me' }" class="btn btn-outline-info btn-outline">Contattateci</router-link> -->
-                    </div>
-
-                    <div>
-                        <input class="form-control" type="search" v-model="store.inputSearch" placeholder="Filtra progetti..." @keyup="apiCall(store.inputSearch)">
-                    </div>
-                    <div>
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-action" v-for="item in this.listItem" @click="chooseAddress(item)">{{ item }}</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
+    <div class="container">
+      <nav class="navbar">
+        <div class="container-fluid d-flex justify-content-between">
+          
+          
+          <!-- Sezione per l'input di ricerca con menu a cascata -->
+          <div class="position-relative">
+            <!-- Campo di input per la ricerca di indirizzi -->
+            <input class="form-control" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..." 
+              @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
+            
+            <!-- Lista di suggerimenti mostrata come un menu a cascata -->
+            <ul class="list-group position-absolute w-100"  v-show="showDropdown">
+              <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
+              <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item" @mousedown="chooseAddress(item)">
+                {{ item }} <!-- Visualizza il suggerimento di indirizzo -->
+              </li>
+            </ul>
+          </div>
         </div>
-        <div @click="prova()">prova</div>
-    </header>
-
+      </nav>
+    </div>
 </template>
 
-<style lang="scss">
+<style>
 
+
+/* Stile per posizionare gli elementi in modo assoluto rispetto al loro contenitore */
+.position-absolute {
+ 
+  z-index: 1000;
+}
+
+/* Stile per gli elementi della lista di suggerimenti, cambiando il cursore su pointer */
+.list-group-item {
+  cursor: pointer;
+}
 </style>
