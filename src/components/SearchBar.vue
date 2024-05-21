@@ -75,15 +75,18 @@ export default {
     <nav class="navbar search-bar">
       <div class="container-fluid">
         <!-- Sezione per l'input di ricerca con menu a cascata -->
-        <div class="position-relative">
+        <div class="position-relative d-flex align-items-center gap-4">
           <!-- Campo di input per la ricerca di indirizzi -->
-          <input class="form-control ms-2 bord" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..."
-            @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
+          <input class="form-control ms-2" type="search" v-model="store.inputSearch"
+            placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
+            @blur="showDropdown = false">
 
           <!-- test -->
-          <router-link :to="{ name: 'SearchPage' }" class="btn btn-primary">
+
+          <router-link :to="{ name: 'SearchPage' }" class="btn my_btn">
             Cerca
           </router-link>
+
 
           <!-- Lista di suggerimenti mostrata come un menu a cascata -->
           <ul class="list-group position-absolute w-100" v-show="showDropdown">
@@ -98,9 +101,8 @@ export default {
     </nav>
   </div>
 </template>
-
 <style>
-/* Stile per posizionare gli elementi in modo assoluto rispetto al loro contenitore */
+/* Stile per posizionare gli elementi in modo assoluto rispetto al loro contenitore /
 .position-relative {
   z-index: 1000;
 }
@@ -109,9 +111,13 @@ export default {
   border-color: #006769c0;
 }
 
-/* Stile per gli elementi della lista di suggerimenti, cambiando il cursore su pointer */
+/ Stile per gli elementi della lista di suggerimenti, cambiando il cursore su pointer */
 .list-group-item {
   cursor: pointer;
+}
+
+.form-control.ms-2 {
+  width: 240px;
 }
 
 .search-bar {
@@ -134,5 +140,22 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 20px;
   background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23006769c0"%3E%3Cpath d="M0 0h24v24H0z" fill="none"/%3E%3Cpath d="M12 10.585l4.95-4.95 1.415 1.414L13.414 12l4.95 4.95-1.415 1.414L12 13.414l-4.95 4.95-1.414-1.414L10.585 12l-4.95-4.95 1.414-1.414L12 10.585z"/%3E%3C/svg%3E') no-repeat center;
   cursor: pointer;
+}
+
+.my_btn {
+  border: 1px solid #006769c0;
+  background-color: white;
+
+  font-weight: bold;
+  color: #006769c0;
+
+  padding-inline: 18px;
+  border-radius: 20px;
+
+  &:hover {
+    border: 1px solid white;
+    background-color: #006769c0;
+    color: white;
+  }
 }
 </style>
