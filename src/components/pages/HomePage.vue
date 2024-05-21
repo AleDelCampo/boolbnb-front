@@ -2,23 +2,20 @@
 import axios from 'axios';
 import { store } from '../../store.js';
 import Jumbo from '../../components/Jumbo.vue';
+
 export default {
   data() {
     return {
-      // apartments: [],
       baseApiUrl: 'http://127.0.0.1:8000/api/',
       store,
       inputRooms: '',
       inputBeds: '',
       inputBathrooms: '',
       inputSquaredMeters: '',
-
-      serviceList:[],
-
+      serviceList: [],
+      apartments: [],
       services: []
-
-
-    }
+    };
   },
 
   components: {
@@ -26,99 +23,97 @@ export default {
   },
 
   methods: {
+    apiFilter() {
+      // Se nessun filtro è selezionato, svuota la lista degli appartamenti
+      if (
+        !this.inputRooms &&
+        !this.inputBeds &&
+        !this.inputBathrooms &&
+        !this.inputSquaredMeters &&
+        this.services.length === 0
+      ) {
+        this.store.apartments = [];
+        return;
+      }
 
-    apiFilter(input){
-
-      // console.log(input)
       axios.get('http://127.0.0.1:8000/api/filter', {
-          params: { rooms: this.inputRooms, beds: this.inputBeds, bathrooms: this.inputBathrooms, sqMeters: this.inputSquaredMeters }
-        })
-          .then(res => {
-            // Memorizza i risultati degli appartamenti nello store
-            this.store.apartments = res.data.results;
-
-            console.log(res.data)
-          })
-          .catch(error => {
-            console.error('Errore durante la ricerca degli appartamenti:', error);
-          });
-
+        params: {
+          rooms: this.inputRooms,
+          beds: this.inputBeds,
+          bathrooms: this.inputBathrooms,
+          sqMeters: this.inputSquaredMeters,
+          services: this.services.length > 0 ? this.services : null // Passa i servizi selezionati, o null se nessun servizio è selezionato
+        }
+      })
+      .then(res => {
+        this.store.apartments = res.data.results;
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.error('Errore durante la ricerca degli appartamenti:', error);
+      });
     },
 
-    toggleService(name){
+    toggleService(id) {
+      const index = this.services.indexOf(id);
+      if (index === -1) {
+        // Aggiungi il servizio se non è già presente
+        this.services.push(id);
+      } else {
+        // Rimuovi il servizio se è già presente
+        this.services.splice(index, 1);
+      }
+      // Ora eseguiamo il filtro con i servizi selezionati
+      this.apiFilter();
+    },
 
-      this.services.push(name)
-      // console.log(this.idList)
-
-      const URLString = this.services.map((value, index)=>`service[${index}]=${value}`).join('&');    
-      
-      axios.get(`http://127.0.0.1:8000/api/service_filter?${URLString}`)
-          .then(res => {
-            // Memorizza i risultati degli appartamenti nello store
-            // this.store.apartments = res.data.results;
-
-            console.log(res.data)
-          })
-          .catch(error => {
-            console.error('Errore durante la ricerca degli appartamenti:', error);
-          });
-
-
+    filterApartments() {
+      this.apiFilter();
     }
-
-    
   },
+
   mounted() {
-
-    axios.get('http://127.0.0.1:8000/api/service', {
-        })
-          .then(res => {
-            this.serviceList = res.data.results
-
-            
-          })
-          .catch(error => {
-            console.error('Errore durante la ricerca degli appartamenti:', error);
-          });
-
-
-  
-    
-  
-  },
-}
+    axios.get('http://127.0.0.1:8000/api/service', {})
+      .then(res => {
+        this.serviceList = res.data.results;
+      })
+      .catch(error => {
+        console.error('Errore durante la ricerca degli appartamenti:', error);
+      });
+  }
+};
 </script>
 
 <template>
-
   <Jumbo></Jumbo>
 
-  <ul>
-    <li v-for="service in serviceList" @click="toggleService(service.name)">{{ service.name }}</li>
-  </ul>
-
-
   <div class="container">
-    <label for="">rooms</label>
-    <input type="number" v-model="inputRooms" @input="apiFilter(inputRooms)" >
-  </div>
-  <div class="container">
-    <label for="">beds</label>
-    <input type="number" v-model="inputBeds" @input="apiFilter(inputBeds)" >
-  </div>
-  <div class="container">
-    <label for="">bathrooms</label>
-    <input type="number" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
-  </div>
-  <div class="container">
-    <label for="">sq-meters</label>
-    <input type="number" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
+    <div v-for="service in serviceList" :key="service.id" class="form-check">
+      <input type="checkbox" class="form-check-input" :id="`service-${service.id}`" :value="service.id" @change="toggleService(service.id)">
+      <label class="form-check-label" :for="`service-${service.id}`">{{ service.name }}</label>
+    </div>
   </div>
 
+  <div class="container">
+    <label for="rooms">Rooms</label>
+    <input type="number" v-model="inputRooms" @input="filterApartments">
+  </div>
+  <div class="container">
+    <label for="beds">Beds</label>
+    <input type="number" v-model="inputBeds" @input="filterApartments">
+  </div>
+  <div class="container">
+    <label for="bathrooms">Bathrooms</label>
+    <input type="number" v-model="inputBathrooms" @input="filterApartments">
+  </div>
+  <div class="container">
+    <label for="sq-meters">Sq Meters</label>
+    <input type="number" v-model="inputSquaredMeters" @input="filterApartments">
+  </div>
 
   <div id="app" class="container mt-5">
     <div class="row">
-      <div class="col-md-6 col-lg-3 mb-4 py-4" v-for="apartment in store.apartments" :key="apartment.slug">
+      <div class="col-md-6 col-lg-3 mb-4" v-for="apartment in store.apartments" :key="apartment.slug">
         <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class="text-decoration-none">
           <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden">
             <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="card-img-top" alt="Listing Image">
@@ -134,19 +129,14 @@ export default {
       </div>
     </div>
   </div>
-
-  
-
-
-  
-
 </template>
+
 
 <style lang="scss" scoped>
 .card {
-  height: 250px; // Altezza ridotta
+  height: 250px;
   background-color: #ffffff;
-  border-radius: 30px; // Bordo arrotondato ridotto
+  border-radius: 30px;
   overflow: hidden;
 }
 
@@ -170,8 +160,7 @@ export default {
   bottom: 0;
   width: 100%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.261), rgba(67, 64, 64, 0));
-
-  height: 50%; // Occupa metà altezza
+  height: 50%;
   color: #ffffff;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -179,7 +168,7 @@ export default {
 
 .card-title {
   font-weight: lighter;
-  color:#006769c0 ;
+  color: #006769c0;
   text-shadow: 1px 1px 2px rgba(39, 37, 37, 0.628);
 }
 
@@ -187,29 +176,24 @@ export default {
   display: none;
 }
 
-
-
 .card:hover .card-img-top {
   transform: scale(1.1);
 }
 
-.card:hover .card-img-overlay, .card:hover .overlay {
+.card:hover .card-img-overlay,
+.card:hover .overlay {
   opacity: 1;
 }
-
-
 
 .card:hover .apartment-details {
   display: block;
 }
 
-
-
-
 @media (max-width: 768px) {
   .card {
-    height: 200px; // Altezza ridotta per schermi piccoli
+    height: 200px;
   }
+
   .card-img-top {
     height: 100%;
   }
