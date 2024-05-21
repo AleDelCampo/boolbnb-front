@@ -103,6 +103,8 @@ export default {
 
   </div>
 
+  <router-link :to="{name: 'contact-me'}">Contattami</router-link>
+
 </template>
 
 

@@ -2,9 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // importazione dei componenti utilizzati come pagina
 import HomePage from './components/pages/HomePage.vue';
-import SingleApartment from './components/pages/SingleApartment.vue'
+import SingleApartment from './components/pages/SingleApartment.vue';
 import SearchBar from './components/SearchBar.vue';
 import SearchPage from './components/pages/SearchPage.vue';
+import ContactMe from './components/pages/ContactMe.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,6 +25,11 @@ const router = createRouter({
             path: '/searchpage',
             name: 'SearchPage',
             component: SearchPage
+        },
+        {
+            path: '/apartments/:slug/contact-me',
+            name: 'contact-me',
+            component: ContactMe
         },
 
        
