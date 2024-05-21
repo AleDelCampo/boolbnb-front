@@ -80,6 +80,11 @@ export default {
           <input class="form-control ms-2 bord" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..."
             @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
 
+          <!-- test -->
+          <router-link :to="{ name: 'SearchPage' }" class="btn btn-primary">
+            Cerca
+          </router-link>
+
           <!-- Lista di suggerimenti mostrata come un menu a cascata -->
           <ul class="list-group position-absolute w-100" v-show="showDropdown">
             <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->

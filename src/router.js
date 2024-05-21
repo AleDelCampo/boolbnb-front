@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 // importazione dei componenti utilizzati come pagina
 import HomePage from './components/pages/HomePage.vue';
 import SingleApartment from './components/pages/SingleApartment.vue'
+import SearchBar from './components/SearchBar.vue';
+import SearchPage from './components/pages/SearchPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,6 +20,12 @@ const router = createRouter({
             name: 'single-apartment',
             component: SingleApartment
         },
+        {
+            path: '/searchpage',
+            name: 'SearchPage',
+            component: SearchPage
+        },
+
        
 
     ]
