@@ -10,6 +10,16 @@ export default {
         // apartments: [],
         baseApiUrl: 'http://127.0.0.1:8000/api/',
         store,
+
+        ServicesFilter:[
+            'wi-fi',
+            'piscina',
+            'portineria',
+            'posto auto',
+            'sauna',
+            'vista mare'
+        ],
+
         inputRooms: '',
         inputBeds: '',
         inputBathrooms: '',
@@ -50,24 +60,76 @@ export default {
 <template>
 
     <div class="container">
-        <label for="">rooms</label>
-        <input type="number" v-model="inputRooms" @input="apiFilter(inputRooms)" >
-      </div>
-      <div class="container">
-        <label for="">beds</label>
-        <input type="number" v-model="inputBeds" @input="apiFilter(inputBeds)" >
-      </div>
-      <div class="container">
-        <label for="">bathrooms</label>
-        <input type="number" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
-      </div>
-      <div class="container">
-        <label for="">sq-meters</label>
-        <input type="number" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
-      </div>
+
+        <div id="filter-wrapper">
+
+            <div id="apartment-filter">
+                <div class="d-flex flex-column">
+                    <label for="">Stanze</label>
+                    <input type="number" v-model="inputRooms" @input="apiFilter(inputRooms)" >
+                </div>
+            
+                <div class="d-flex flex-column">
+                    <label for="">Letti</label>
+                    <input type="number" v-model="inputBeds" @input="apiFilter(inputBeds)" >
+                </div>
+            
+                <div class="d-flex flex-column">
+                    <label for="">Bagni</label>
+                    <input type="number" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
+                </div>
+            
+                <div class="d-flex flex-column">
+                    <label for="">Grandezza(mq)</label>
+                    <input type="number" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
+                </div>
+            </div>
+            <div id="services-filter">
+                <div v-for="service in ServicesFilter">
+                    <input  type="checkbox" class="btn-check prova" :name="service"> 
+                    <label for="" class="btn service-btn" >{{service}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </template>
 
 <style lang="scss" scoped>
+
+.service-btn {
+    border: 2px solid #006769c0;
+    padding-inline: 30px;
+    border-radius: 20px;
+
+
+
+    &:hover {
+        background-color: #006769c0;
+        color: white;
+
+    }
+
+
+}
+
+#filter-wrapper{
+    display: flex;
+    justify-content:space-evenly ;
+}
+
+#apartment-filter {
+    display: flex;
+    gap:5px;
+
+    input[type="number"]{
+        width: 50px;
+    }
+}
+
+#services-filter{
+    display: flex;
+    gap:20px;
+}
 
 </style>
