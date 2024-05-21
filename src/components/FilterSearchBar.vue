@@ -66,27 +66,27 @@ export default {
             <div id="apartment-filter">
                 <div class="d-flex flex-column">
                     <label for="">Stanze</label>
-                    <input type="number" v-model="inputRooms" @input="apiFilter(inputRooms)" >
+                    <input type="number" class="info-input" v-model="inputRooms" @input="apiFilter(inputRooms)" >
                 </div>
             
                 <div class="d-flex flex-column">
                     <label for="">Letti</label>
-                    <input type="number" v-model="inputBeds" @input="apiFilter(inputBeds)" >
+                    <input type="number" class="info-input" v-model="inputBeds" @input="apiFilter(inputBeds)" >
                 </div>
             
                 <div class="d-flex flex-column">
                     <label for="">Bagni</label>
-                    <input type="number" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
+                    <input type="number" class="info-input" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
                 </div>
             
                 <div class="d-flex flex-column">
                     <label for="">Grandezza(mq)</label>
-                    <input type="number" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
+                    <input type="number" class="info-input" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
                 </div>
             </div>
             <div id="services-filter">
                 <div v-for="service in ServicesFilter">
-                    <input  type="checkbox" class="btn-check prova" :name="service"> 
+                    <input  type="checkbox" class="btn-check prova" name="services[]"> 
                     <label for="" class="btn service-btn" >{{service}}</label>
                 </div>
             </div>
@@ -113,9 +113,17 @@ export default {
 
 }
 
+.info-input{
+    border: 2px solid #006769c0;
+    padding:6px 20px;
+    border-radius: 20px;
+    color:black
+}
+
 #filter-wrapper{
     display: flex;
-    justify-content:space-evenly ;
+    justify-content:space-evenly;
+    align-items: center;
 }
 
 #apartment-filter {
@@ -123,7 +131,7 @@ export default {
     gap:5px;
 
     input[type="number"]{
-        width: 50px;
+        width: 70px;
     }
 }
 
