@@ -8,6 +8,15 @@ export default {
       // apartments: [],
       baseApiUrl: 'http://127.0.0.1:8000/api/',
       store,
+      inputRooms: '',
+      inputBeds: '',
+      inputBathrooms: '',
+      inputSquaredMeters: '',
+
+      serviceList:[],
+
+      services: []
+
 
     }
   },
@@ -16,28 +25,66 @@ export default {
     Jumbo
   },
 
-  mounted() {
-
-    // da eliminare
-
-    // axios.get(this.baseApiUrl + 'apartments').then(res => {
-    //   store.apartments = res.data.results;
-    // // store.appartmentsAddress = 
-
-      //  store.apartments.forEach(element => {
-
-      // const item = element.address;
-
-      // store.apartmentsAddress.push(item)
-
-
-    // });
-
-    // })
-
-  },
   methods: {
 
+    apiFilter(input){
+
+      // console.log(input)
+      axios.get('http://127.0.0.1:8000/api/filter', {
+          params: { rooms: this.inputRooms, beds: this.inputBeds, bathrooms: this.inputBathrooms, sqMeters: this.inputSquaredMeters }
+        })
+          .then(res => {
+            // Memorizza i risultati degli appartamenti nello store
+            this.store.apartments = res.data.results;
+
+            console.log(res.data)
+          })
+          .catch(error => {
+            console.error('Errore durante la ricerca degli appartamenti:', error);
+          });
+
+    },
+
+    toggleService(name){
+
+      this.services.push(name)
+      // console.log(this.idList)
+
+      const URLString = this.services.map((value, index)=>`service[${index}]=${value}`).join('&');    
+      
+      axios.get(`http://127.0.0.1:8000/api/service_filter?${URLString}`)
+          .then(res => {
+            // Memorizza i risultati degli appartamenti nello store
+            // this.store.apartments = res.data.results;
+
+            console.log(res.data)
+          })
+          .catch(error => {
+            console.error('Errore durante la ricerca degli appartamenti:', error);
+          });
+
+
+    }
+
+    
+  },
+  mounted() {
+
+    axios.get('http://127.0.0.1:8000/api/service', {
+        })
+          .then(res => {
+            this.serviceList = res.data.results
+
+            
+          })
+          .catch(error => {
+            console.error('Errore durante la ricerca degli appartamenti:', error);
+          });
+
+
+  
+    
+  
   },
 }
 </script>
@@ -45,6 +92,29 @@ export default {
 <template>
 
   <Jumbo></Jumbo>
+
+  <ul>
+    <li v-for="service in serviceList" @click="toggleService(service.name)">{{ service.name }}</li>
+  </ul>
+
+
+  <div class="container">
+    <label for="">rooms</label>
+    <input type="number" v-model="inputRooms" @input="apiFilter(inputRooms)" >
+  </div>
+  <div class="container">
+    <label for="">beds</label>
+    <input type="number" v-model="inputBeds" @input="apiFilter(inputBeds)" >
+  </div>
+  <div class="container">
+    <label for="">bathrooms</label>
+    <input type="number" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
+  </div>
+  <div class="container">
+    <label for="">sq-meters</label>
+    <input type="number" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
+  </div>
+
 
   <div id="app" class="container mt-5">
     <div class="row">
@@ -64,6 +134,12 @@ export default {
       </div>
     </div>
   </div>
+
+  
+
+
+  
+
 </template>
 
 <style lang="scss" scoped>
