@@ -50,8 +50,9 @@ export default {
     <div class="row">
       <div class="col-md-6 col-lg-3 mb-4 py-4" v-for="apartment in store.apartments" :key="apartment.slug">
         <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class="text-decoration-none">
-          <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden">
+          <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden card-cover">
             <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="card-img-top" alt="Listing Image">
+            <span class="distance">{{apartment.distance.toFixed(2)}}km</span>
             <div class="card-img-overlay d-flex flex-column justify-content-end p-3 transition-overlay">
               <div class="apartment-details p-2 mt-2">
                 <p class="card-text  mb-1 text-white font-weight">{{ apartment.address }}</p>
@@ -73,6 +74,29 @@ export default {
   border-radius: 30px; // Bordo arrotondato ridotto
   overflow: hidden;
 }
+
+.card-cover{
+  position:relative;
+}
+
+.distance{
+  display: inline-block;
+
+  padding: 2px 4px;
+
+  border-radius: 4px;
+
+  background-color: #3f8d8e;
+
+  position: absolute;
+  top: 10px;
+  left: 20px;
+
+  font-size:.7em;
+  color:white;
+}
+
+
 
 .card-img-top {
   width: 100%;

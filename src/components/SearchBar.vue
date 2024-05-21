@@ -81,7 +81,7 @@ export default {
           <input class="form-control ms-2 bord" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..."
             @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
 
-          <!-- <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km -->
+          <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km
 
           <!-- Lista di suggerimenti mostrata come un menu a cascata -->
           <ul class="list-group position-absolute w-100" v-show="showDropdown">
