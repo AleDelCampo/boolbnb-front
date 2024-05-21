@@ -9,6 +9,7 @@ export default {
       store,
       listItem: [], // Lista per i suggerimenti di autocompletamento
       showDropdown: false, // Controlla la visibilità del menu a cascata della ricerca
+      radius:0, //segna i chilometri selezionati dall'utenete per la ricerca
     };
   },
   methods: {
@@ -50,7 +51,7 @@ export default {
         this.longitude = selectedAddress.position.lon;
         // Esegui una richiesta GET alla tua API per cercare appartamenti vicini
         axios.get('http://127.0.0.1:8000/api/search', {
-          params: { latitude: this.latitude, longitude: this.longitude }
+          params: { latitude: this.latitude, longitude: this.longitude, radius:this.radius}
         })
           .then(res => {
             // Memorizza i risultati degli appartamenti nello store
@@ -79,6 +80,8 @@ export default {
           <!-- Campo di input per la ricerca di indirizzi -->
           <input class="form-control ms-2 bord" type="search" v-model="store.inputSearch" placeholder="Inserisci un indirizzo..."
             @input="apiCall" @focus="showDropdown = true" @blur="showDropdown = false">
+
+          <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km
 
           <!-- test -->
           <router-link :to="{ name: 'SearchPage' }" class="btn btn-primary">
