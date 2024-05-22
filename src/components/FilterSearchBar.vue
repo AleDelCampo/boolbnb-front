@@ -5,6 +5,11 @@ import { store } from '../store.js';
 export default {
     name: 'FilterSearchPage',
 
+    props:{
+        latitudine:Number,
+        longitudine:Number,
+    },
+
     data() {
         return {
         // apartments: [],
@@ -43,8 +48,12 @@ export default {
             return;
         }
 
+
         axios.get('http://127.0.0.1:8000/api/filter', {
             params: {
+            latitude: this.latitudine, 
+            longitude: this.longitudine, 
+            radius:this.radius,
             rooms: store.inputRooms,
             beds: store.inputBeds,
             bathrooms: store.inputBathrooms,
@@ -103,7 +112,7 @@ export default {
 
                 <section class="mb-4">
                     <h2 class="mb-3">Raggio di distanza</h2>
-                    <input type="range" id="radius" min="1" max="30" v-model="radius">{{ radius }}km
+                    <input type="range" id="radius" min="1" max="30" step="5" v-model="radius" @input="filterApartments">{{ radius }}km
                 </section>
             
                 <section class="mb-4">

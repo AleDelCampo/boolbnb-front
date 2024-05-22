@@ -1,14 +1,22 @@
 <script>
 import { store } from '../store';
 import axios from 'axios';
+import FilterSearchBar from './FilterSearchBar.vue';
 
 export default {
   name: 'SearchBar',
+
+  components:{
+    FilterSearchBar
+  },
+
   data() {
     return {
       store,
       listItem: [], // Lista per i suggerimenti di autocompletamento
       showDropdown: false, // Controlla la visibilità del menu a cascata della ricerca
+      latitude:null,
+      longitude:null,
       radius:0, //segna i chilometri selezionati dall'utenete per la ricerca
     };
   },
@@ -50,16 +58,16 @@ export default {
         this.latitude = selectedAddress.position.lat;
         this.longitude = selectedAddress.position.lon;
         // Esegui una richiesta GET alla tua API per cercare appartamenti vicini
-        axios.get('http://127.0.0.1:8000/api/search', {
-          params: { latitude: this.latitude, longitude: this.longitude, radius:this.radius}
-        })
-          .then(res => {
-            // Memorizza i risultati degli appartamenti nello store
-            this.store.apartments = res.data.results;
-          })
-          .catch(error => {
-            console.error('Errore durante la ricerca degli appartamenti:', error);
-          });
+        // axios.get('http://127.0.0.1:8000/api/search', {
+        //   params: { latitude: this.latitude, longitude: this.longitude, radius:this.radius}
+        // })
+        //   .then(res => {
+        //     // Memorizza i risultati degli appartamenti nello store
+        //     this.store.apartments = res.data.results;
+        //   })
+        //   .catch(error => {
+        //     console.error('Errore durante la ricerca degli appartamenti:', error);
+        //   });
       }
     }
   }
@@ -81,8 +89,14 @@ export default {
           <input class="form-control ms-2" type="search" v-model="store.inputSearch"
             placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
             @blur="showDropdown = false">
+            {{console.log(latitude, longitude ) }}
 
-            <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km
+            <!-- <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km -->
+            <FilterSearchBar
+            :latitudine="this.latitude"
+            :longitudine="this.longitude"
+            >
+            </FilterSearchBar>
 
           <!-- test -->
 
