@@ -53,7 +53,6 @@ export default {
     <div id="app" class="container mt-5">
         <div id="search-bar">
             <SearchBar></SearchBar>
-            <FilterSearchBar></FilterSearchBar>
         </div>
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4 py-4" v-for="apartment in store.apartments" :key="apartment.slug">
