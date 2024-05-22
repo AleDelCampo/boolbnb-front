@@ -82,7 +82,7 @@ export default {
             placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
             @blur="showDropdown = false">
 
-          <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km
+            <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km
 
           <!-- test -->
 

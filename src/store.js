@@ -6,4 +6,11 @@ export const store = reactive({
   addresses: [], // Indirizzi suggeriti dall'API di TomTom
   apartmentsAddress: [], // Appartamenti trovati vicino all'indirizzo
   apartments: [], // Lista di appartamenti trovati tramite la ricerca
+
+
+  inputRooms: '',
+  inputBeds: '',
+  inputBathrooms: '',
+  inputSquaredMeters: '',
+  services: []
 });

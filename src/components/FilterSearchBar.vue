@@ -10,47 +10,72 @@ export default {
         // apartments: [],
         baseApiUrl: 'http://127.0.0.1:8000/api/',
         store,
+        radius:20,
 
-        ServicesFilter:[
-            'wi-fi',
-            'piscina',
-            'portineria',
-            'posto auto',
-            'sauna',
-            'vista mare'
-        ],
-
-        inputRooms: '',
-        inputBeds: '',
-        inputBathrooms: '',
-        inputSquaredMeters: '',
+        serviceList: [],
 
         }
     },
 
     mounted() {
 
-    
+        axios.get('http://127.0.0.1:8000/api/service')
+            .then(res => {
+                this.serviceList = res.data.results;
+            })
+            .catch(error => {
+                console.error('Errore durante la ricerca degli appartamenti:', error);
+            });
 
     },
     methods: {
 
-        apiFilter(input){
+        apiFilter() {
+        // Se nessun filtro è selezionato, svuota la lista degli appartamenti
+        if (
+            !store.inputRooms &&
+            !store.inputBeds &&
+            !store.inputBathrooms &&
+            !store.inputSquaredMeters &&
+            store.services.length === 0
+        ) {
+            store.apartments = [];
+            return;
+        }
 
-            // console.log(input)
-            axios.get('http://127.0.0.1:8000/api/filter', {
-                params: { rooms: this.inputRooms, beds: this.inputBeds, bathrooms: this.inputBathrooms, sqMeters: this.inputSquaredMeters }
-            })
-            .then(res => {
-            // Memorizza i risultati degli appartamenti nello store
-            this.store.apartments = res.data.result;    
-
-            console.log(res.data.result)
-            })
-            .catch(error => {
+        axios.get('http://127.0.0.1:8000/api/filter', {
+            params: {
+            rooms: store.inputRooms,
+            beds: store.inputBeds,
+            bathrooms: store.inputBathrooms,
+            sqMeters: store.inputSquaredMeters,
+            services: store.services.length > 0 ? store.services : null // Passa i servizi selezionati, o null se nessun servizio è selezionato
+            }
+        })
+        .then(res => {
+            store.apartments = res.data.results;
+            console.log(res.data);
+        })
+        .catch(error => {
             console.error('Errore durante la ricerca degli appartamenti:', error);
-            });
+        });
+        },
 
+        toggleService(id) {
+        const index = store.services.indexOf(id);
+        if (index === -1) {
+            // Aggiungi il servizio se non è già presente
+            store.services.push(id);
+        } else {
+            // Rimuovi il servizio se è già presente
+            store.services.splice(index, 1);
+        }
+        // Ora eseguiamo il filtro con i servizi selezionati
+        this.apiFilter();
+        },
+
+        filterApartments() {
+        this.apiFilter();
         }
 
     },
@@ -75,28 +100,33 @@ export default {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
+                <section class="mb-4">
+                    <h2 class="mb-3">Raggio di distanza</h2>
+                    <input type="range" id="radius" min="1" max="30" v-model="radius">{{ radius }}km
+                </section>
             
                 <section class="mb-4">
                     <h2 class="mb-3">Stanze e letti</h2>
                     <div id="apartment-filter">
                         <div class="d-flex flex-column">
                             <label for="">Stanze</label>
-                            <input type="number" class="info-input" v-model="inputRooms" @input="apiFilter(inputRooms)" >
+                            <input type="number" class="info-input" v-model="store.inputRooms" @input="filterApartments" >
                         </div>
                     
                         <div class="d-flex flex-column">
                             <label for="">Letti</label>
-                            <input type="number" class="info-input" v-model="inputBeds" @input="apiFilter(inputBeds)" >
+                            <input type="number" class="info-input" v-model="store.inputBeds" @input="filterApartments" >
                         </div>
                     
                         <div class="d-flex flex-column">
                             <label for="">Bagni</label>
-                            <input type="number" class="info-input" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
+                            <input type="number" class="info-input" v-model="store.inputBathrooms" @input="filterApartments" >
                         </div>
                     
                         <div class="d-flex flex-column">
                             <label for="">Grandezza(mq)</label>
-                            <input type="number" class="info-input" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
+                            <input type="number" class="info-input" v-model="store.inputSquaredMeters" @input="filterApartments" >
                         </div>
                     </div>
                 </section>
@@ -104,9 +134,9 @@ export default {
                 <section>
                     <h2 class="mb-3">Servizi disponibili</h2>
                     <div id="services-filter" class="row row-cols-3 g-3">
-                        <div v-for="(service,index) in ServicesFilter">
-                            <input  type="checkbox" class="btn-check prova" name="services[]" :id="index"> 
-                            <label :for="index" class="btn service-btn" >{{service}}</label>
+                        <div v-for="service in serviceList">
+                            <input  type="checkbox" class="btn-check prova" name="services[]" :id="`service-${service.id}`" :value="service.id" @change="toggleService(service.id)"> 
+                            <label :for="`service-${service.id}`" class="btn service-btn" >{{ service.name }}</label>
                         </div>
                     </div>
                 </section>
