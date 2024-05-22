@@ -114,7 +114,7 @@ export default {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Filtra i risultati</button>
+                <button type="button" class="filter-button">Filtra i risultati</button>
             </div>
         </div>
         </div>
@@ -154,6 +154,16 @@ input:checked+.service-btn {
     padding:6px 20px;
     border-radius: 20px;
     color:black
+}
+
+.filter-button{
+    background-color:#006769c0;
+    color:white;
+
+    padding:6px 12px;
+
+    border:1px solid #006769c0;
+    border-radius:5px;
 }
 
 </style>
