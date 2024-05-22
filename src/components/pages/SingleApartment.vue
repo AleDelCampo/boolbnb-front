@@ -99,7 +99,7 @@ export default {
 
           </div>
           <div class="p-3">
-            <router-link :to="{name: 'contact-me'}" class="btn btn-primary" @click="catchId(apartment.id)">Contattami</router-link>
+            <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contattami</router-link>
           </div>
         </div>
       </div>

@@ -65,7 +65,7 @@ export default {
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Invia</button>
+    <button type="submit" class="btn my_btn">Invia</button>
 
 </form>
 
