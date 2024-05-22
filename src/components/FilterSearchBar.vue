@@ -104,9 +104,9 @@ export default {
                 <section>
                     <h2 class="mb-3">Servizi disponibili</h2>
                     <div id="services-filter" class="row row-cols-3 g-3">
-                        <div v-for="service in ServicesFilter">
-                            <input  type="checkbox" class="btn-check prova" name="services[]"> 
-                            <label for="" class="btn service-btn" >{{service}}</label>
+                        <div v-for="(service,index) in ServicesFilter">
+                            <input  type="checkbox" class="btn-check prova" name="services[]" :id="index"> 
+                            <label :for="index" class="btn service-btn" >{{service}}</label>
                         </div>
                     </div>
                 </section>
@@ -114,7 +114,7 @@ export default {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Filtra i risultati</button>
             </div>
         </div>
         </div>
@@ -139,6 +139,13 @@ export default {
 
     }
 
+
+}
+
+input:checked+.service-btn {
+    background-color: #006769c0;
+    color: white;
+    border: 2px solid #006769c0;
 
 }
 
