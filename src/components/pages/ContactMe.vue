@@ -16,7 +16,7 @@ export default {
 
 <template>
 
-<div class="container">
+<div class="container py-4">
 
   <h1>Contattami</h1>
 
