@@ -55,11 +55,11 @@ export default {
       // Se è stato trovato un indirizzo corrispondente in addresses
       if (selectedAddress) {
         // Ottieni latitudine e longitudine dell'indirizzo selezionato
-        this.latitude = selectedAddress.position.lat;
-        this.longitude = selectedAddress.position.lon;
+        store.latitude = selectedAddress.position.lat;
+        store.longitude = selectedAddress.position.lon;
         // Esegui una richiesta GET alla tua API per cercare appartamenti vicini
         axios.get('http://127.0.0.1:8000/api/search', {
-          params: { latitude: this.latitude, longitude: this.longitude, radius:this.radius}
+          params: { latitude: store.latitude, longitude: store.longitude, radius:this.radius}
         })
           .then(res => {
             // Memorizza i risultati degli appartamenti nello store
@@ -93,11 +93,7 @@ export default {
             {{console.log(latitude, longitude ) }}
 
             <!-- <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km -->
-            <FilterSearchBar
-            :latitudine="this.latitude"
-            :longitudine="this.longitude"
-            >
-            </FilterSearchBar>
+            <FilterSearchBar></FilterSearchBar>
 
           <!-- test -->
 

@@ -5,10 +5,6 @@ import { store } from '../store.js';
 export default {
     name: 'FilterSearchPage',
 
-    props:{
-        latitudine:Number,
-        longitudine:Number,
-    },
 
     data() {
         return {
@@ -40,8 +36,8 @@ export default {
 
         axios.get('http://127.0.0.1:8000/api/filter', {
             params: {
-            latitude: this.latitudine, 
-            longitude: this.longitudine, 
+            latitude: store.latitude, 
+            longitude: store.longitude, 
             radius:this.radius,
             rooms: store.inputRooms,
             beds: store.inputBeds,
