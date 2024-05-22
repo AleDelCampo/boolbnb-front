@@ -59,39 +59,67 @@ export default {
 
 <template>
 
-    <div class="container">
+    
 
-        <div id="filter-wrapper">
-
-            <div id="apartment-filter">
-                <div class="d-flex flex-column">
-                    <label for="">Stanze</label>
-                    <input type="number" class="info-input" v-model="inputRooms" @input="apiFilter(inputRooms)" >
-                </div>
-            
-                <div class="d-flex flex-column">
-                    <label for="">Letti</label>
-                    <input type="number" class="info-input" v-model="inputBeds" @input="apiFilter(inputBeds)" >
-                </div>
-            
-                <div class="d-flex flex-column">
-                    <label for="">Bagni</label>
-                    <input type="number" class="info-input" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
-                </div>
-            
-                <div class="d-flex flex-column">
-                    <label for="">Grandezza(mq)</label>
-                    <input type="number" class="info-input" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
-                </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Filtri
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Filtri</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div id="services-filter">
-                <div v-for="service in ServicesFilter">
-                    <input  type="checkbox" class="btn-check prova" name="services[]"> 
-                    <label for="" class="btn service-btn" >{{service}}</label>
-                </div>
+            <div class="modal-body">
+            
+                <section class="mb-4">
+                    <h2 class="mb-3">Stanze e letti</h2>
+                    <div id="apartment-filter">
+                        <div class="d-flex flex-column">
+                            <label for="">Stanze</label>
+                            <input type="number" class="info-input" v-model="inputRooms" @input="apiFilter(inputRooms)" >
+                        </div>
+                    
+                        <div class="d-flex flex-column">
+                            <label for="">Letti</label>
+                            <input type="number" class="info-input" v-model="inputBeds" @input="apiFilter(inputBeds)" >
+                        </div>
+                    
+                        <div class="d-flex flex-column">
+                            <label for="">Bagni</label>
+                            <input type="number" class="info-input" v-model="inputBathrooms" @input="apiFilter(inputBathrooms)" >
+                        </div>
+                    
+                        <div class="d-flex flex-column">
+                            <label for="">Grandezza(mq)</label>
+                            <input type="number" class="info-input" v-model="inputSquaredMeters" @input="apiFilter(inputSquaredMeters)" >
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="mb-3">Servizi disponibili</h2>
+                    <div id="services-filter" class="row row-cols-3 g-3">
+                        <div v-for="service in ServicesFilter">
+                            <input  type="checkbox" class="btn-check prova" name="services[]"> 
+                            <label for="" class="btn service-btn" >{{service}}</label>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
+        </div>
     </div>
+   
 
 </template>
 
@@ -99,8 +127,9 @@ export default {
 
 .service-btn {
     border: 2px solid #006769c0;
-    padding-inline: 30px;
     border-radius: 20px;
+
+    width: 100%;
 
 
 
@@ -118,26 +147,6 @@ export default {
     padding:6px 20px;
     border-radius: 20px;
     color:black
-}
-
-#filter-wrapper{
-    display: flex;
-    justify-content:space-evenly;
-    align-items: center;
-}
-
-#apartment-filter {
-    display: flex;
-    gap:5px;
-
-    input[type="number"]{
-        width: 70px;
-    }
-}
-
-#services-filter{
-    display: flex;
-    gap:20px;
 }
 
 </style>
