@@ -36,18 +36,7 @@ export default {
     methods: {
 
         apiFilter() {
-        // Se nessun filtro è selezionato, svuota la lista degli appartamenti
-        if (
-            !store.inputRooms &&
-            !store.inputBeds &&
-            !store.inputBathrooms &&
-            !store.inputSquaredMeters &&
-            store.services.length === 0
-        ) {
-            store.apartments = [];
-            return;
-        }
-
+        
 
         axios.get('http://127.0.0.1:8000/api/filter', {
             params: {
@@ -112,7 +101,7 @@ export default {
 
                 <section class="mb-4">
                     <h2 class="mb-3">Raggio di distanza</h2>
-                    <input type="range" id="radius" min="1" max="30" step="5" v-model="radius" @input="filterApartments">{{ radius }}km
+                    <input type="range" id="radius" min="1" max="30"  v-model="radius" @change="filterApartments">{{ radius }}km
                 </section>
             
                 <section class="mb-4">
@@ -152,8 +141,7 @@ export default {
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="filter-button">Filtra i risultati</button>
+                <button type="button" class="filter-button" data-bs-dismiss="modal">Filtra i risultati</button>
             </div>
         </div>
         </div>
