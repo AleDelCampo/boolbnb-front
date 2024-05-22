@@ -107,7 +107,7 @@ export default {
 
 
           <!-- Lista di suggerimenti mostrata come un menu a cascata -->
-          <ul class="list-group position-absolute w-100" v-show="showDropdown">
+          <ul class="list-group position-absolute w-100 menu-indirizzi" v-show="showDropdown">
             <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
             <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item"
               @mousedown="chooseAddress(item)">
@@ -175,5 +175,13 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: #006769c0;
     color: white;
   }
+}
+
+.menu-indirizzi{
+  left:0;
+  top:0;
+  z-index: 2;
+
+  transform: translate(0,37px);
 }
 </style>
