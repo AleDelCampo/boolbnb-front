@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import { store } from '../../store';
 
 export default {
   name: 'SingleApartment',
@@ -30,14 +31,22 @@ export default {
         console.error('Error fetching apartment details:', error);
         // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
       });
-      console.log(this.apartment);
-  }
+      // console.log(this.apartment);
+  },
+
+  methods: {
+    catchId(id) {
+        store.idMessage = ''
+        store.idMessage = id
+        // console.log(store.idMessage)
+    }
+  },
 }
 </script>
 
 <template>
   <div>
-    <div v-if="apartment" class="container py-4">
+    <div v-if="apartment" class="container py-5">
       <div class="row">
         <!-- Immagine -->
         <div class="col-md-6 mb-4">
@@ -89,6 +98,9 @@ export default {
             <p v-else><strong class="text">Services:</strong> No extra services</p>
 
           </div>
+          <div class="p-3">
+            <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contattami</router-link>
+          </div>
         </div>
       </div>
 
@@ -102,6 +114,7 @@ export default {
     </div>
 
   </div>
+
 
 </template>
 
