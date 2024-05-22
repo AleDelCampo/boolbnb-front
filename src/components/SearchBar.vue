@@ -58,16 +58,17 @@ export default {
         this.latitude = selectedAddress.position.lat;
         this.longitude = selectedAddress.position.lon;
         // Esegui una richiesta GET alla tua API per cercare appartamenti vicini
-        // axios.get('http://127.0.0.1:8000/api/search', {
-        //   params: { latitude: this.latitude, longitude: this.longitude, radius:this.radius}
-        // })
-        //   .then(res => {
-        //     // Memorizza i risultati degli appartamenti nello store
-        //     this.store.apartments = res.data.results;
-        //   })
-        //   .catch(error => {
-        //     console.error('Errore durante la ricerca degli appartamenti:', error);
-        //   });
+        axios.get('http://127.0.0.1:8000/api/search', {
+          params: { latitude: this.latitude, longitude: this.longitude, radius:this.radius}
+        })
+          .then(res => {
+            // Memorizza i risultati degli appartamenti nello store
+            this.store.apartments = res.data.results;
+            console.log(res);
+          })
+          .catch(error => {
+            console.error('Errore durante la ricerca degli appartamenti:', error);
+          });
       }
     }
   }
