@@ -264,6 +264,8 @@ input:checked+.service-btn {
 .info-input{
     width: 100%;
     border: 2px solid #006769c0;
+    
+    border-radius: 20px;
     padding:6px 20px;
     color:black
 }
