@@ -182,7 +182,7 @@ export default {
             <div id="bottom-bar">
                 <div id="services">
     
-                    <h6 class="mb-3">Servizi disponibili</h6>
+                    <strong class="mb-3">Servizi disponibili</strong>
                     <div id="services-filter">
                         <div v-for="service in serviceList">
                             <input  type="checkbox" class="btn-check prova" name="services[]" :id="`service-${service.id}`" :value="service.id" @change="toggleService(service.id)"> 
