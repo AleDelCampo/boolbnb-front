@@ -93,7 +93,7 @@ export default {
             {{console.log(latitude, longitude ) }}
 
             <!-- <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km -->
-            <FilterSearchBar></FilterSearchBar>
+            <!-- <FilterSearchBar></FilterSearchBar> -->
 
           <!-- test -->
 

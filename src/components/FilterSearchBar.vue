@@ -81,12 +81,12 @@ export default {
     
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Filtri
-    </button>
+    </button> -->
     
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,52 +141,140 @@ export default {
             </div>
         </div>
         </div>
-    </div>
+    </div> -->
    
+
+    <div class="filter-wrapper">
+
+        <div id="inner" class="col-12 col-lg-8 col-md-10">
+
+            <h2 class="mb-3 text-center">Filtri </h2>
+            <div id="top-bar" class="row">
+                <div id="range" class="col-12 col-lg-4 d-flex flex-column">
+                    <label for="radius" class="mb-3"><strong>Filtro di distanza:</strong> {{ radius }}km</label>
+                    <input type="range" id="radius" min="1" max="30"  v-model="radius" @change="filterApartments">
+    
+                </div>
+    
+                <div id="apartment-info" class=" col-12 col-lg-8 row row-cols-2 m-0">
+                    <div class="d-flex flex-column">
+                        <label for="">Stanze</label>
+                        <input type="number" class="info-input" v-model="store.inputRooms" @input="filterApartments" >
+                    </div>
+                
+                    <div class="d-flex flex-column">
+                        <label for="">Letti</label>
+                        <input type="number" class="info-input" v-model="store.inputBeds" @input="filterApartments" >
+                    </div>
+                
+                    <div class="d-flex flex-column">
+                        <label for="">Bagni</label>
+                        <input type="number" class="info-input" v-model="store.inputBathrooms" @input="filterApartments" >
+                    </div>
+                
+                    <div class="d-flex flex-column">
+                        <label for="">Grandezza(mq)</label>
+                        <input type="number" class="info-input" v-model="store.inputSquaredMeters" @input="filterApartments" >
+                    </div>
+                </div>
+            </div>
+    
+            <div id="bottom-bar">
+                <div id="services">
+    
+                    <h6 class="mb-3">Servizi disponibili</h6>
+                    <div id="services-filter">
+                        <div v-for="service in serviceList">
+                            <input  type="checkbox" class="btn-check prova" name="services[]" :id="`service-${service.id}`" :value="service.id" @change="toggleService(service.id)"> 
+                            <label :for="`service-${service.id}`" class="service-btn label-btn" >
+                                <div class="icon">
+                                    <i class="fa-solid fa-wifi"></i>
+                                </div>
+                                <div class="name">
+                                    {{ service.name }}
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
+        </div>
+        
+
+
+    </div>
+
 
 </template>
 
 <style lang="scss" scoped>
 
-.service-btn {
-    border: 2px solid #006769c0;
-    border-radius: 20px;
 
+.filter-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+    #top-bar{
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+
+    #services-filter{
+        display: flex;
+        justify-content: space-evenly;
+
+
+        .label-btn{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
+
+
+.service-btn {
     width: 100%;
 
+    border:1px solid transparent;
+    font-weight: 600;
 
+    color:rgba(0,0,0,.5);
+    
 
     &:hover {
-        background-color: #006769c0;
-        color: white;
-
+        border-bottom:1px solid #006769c0;
+        cursor:pointer;
+        color:rgba(0,0,0,1);
     }
 
 
 }
 
 input:checked+.service-btn {
-    background-color: #006769c0;
-    color: white;
-    border: 2px solid #006769c0;
-
+    border-bottom:1px solid #006769c0;
+    color:rgba(0,0,0,1);
 }
 
 .info-input{
+    width: 100%;
     border: 2px solid #006769c0;
     padding:6px 20px;
-    border-radius: 20px;
     color:black
 }
 
-.filter-button{
-    background-color:#006769c0;
-    color:white;
-
-    padding:6px 12px;
-
-    border:1px solid #006769c0;
-    border-radius:5px;
+#apartment-info > div:nth-of-type(2n + 1){
+    padding-left: 0;
 }
+
+#apartment-info > div:nth-of-type(2n + 2){
+    padding-right: 0;
+}
+
 
 </style>
