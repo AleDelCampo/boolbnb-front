@@ -76,50 +76,35 @@ export default {
 </script>
 
 <template>
-<!-- 
-  <div class="container d-flex justify-content-center">
-    <nav class="navbar search-bar"> -->
-        <!-- Sezione per l'input di ricerca con menu a cascata -->
-        <!-- <div class="position-relative w-100 d-flex align-items-center justify-content-between"> -->
-          <!-- Campo di input per la ricerca di indirizzi -->
-          <!-- <input class="form-control ms-2" type="search" v-model="store.inputSearch"
-            placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
-            @blur="showDropdown = false"> -->
 
-          <!-- test -->
-
-          <!-- <router-link :to="{ name: 'SearchPage' }" class="btn my_btn me-2">
-            Cerca
-          </router-link> -->
+  
 
 
-          <!-- Lista di suggerimenti mostrata come un menu a cascata -->
-          <!-- <ul class="list-group position-absolute w-100 menu-indirizzi" v-show="showDropdown"> -->
-            <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
-            <!-- <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item" -->
-              <!-- @mousedown="chooseAddress(item)"> -->
-              <!-- {{ item }}  -->
-              <!-- Visualizza il suggerimento di indirizzo -->
-            <!-- </li>
-          </ul>
-        </div>
-    </nav> -->
-  <!-- </div> -->
-
-
-
+  
+  
+  
+  
   <div class="container">
-
+    
     <div id="search-bar-wrapper" class="col-5">
-
+      
       <div id="search-icon">
         <i class="fa-solid fa-house"></i>
       </div>
-
+      
       <div class="text">
         <input class="search-input ms-2" type="search" v-model="store.inputSearch"
-            placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
-            @blur="showDropdown = false">
+        placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
+        @blur="showDropdown = false">
+        <!-- Lista di suggerimenti mostrata come un menu a cascata -->
+        <ul class="list-group position-absolute w-100 menu-indirizzi" v-show="showDropdown">
+          <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
+          <li class="list-group-item list-group-item-action" v-for="item in listItem" 
+             @mousedown="chooseAddress(item)">
+            {{ item }} 
+            <!-- Visualizza il suggerimento di indirizzo -->
+          </li>
+        </ul>
       </div>
 
       <div class="button">
@@ -170,6 +155,10 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
   background-color: white;
+
+  .text{
+    position:relative;
+  }
 
   #search-icon{
     color:#006769c0;

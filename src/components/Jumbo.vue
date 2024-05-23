@@ -44,7 +44,7 @@ export default {
                 </div>
             </div>
         </div>
-        <SearchBar id="search-bar"></SearchBar>
+        <SearchBar></SearchBar>
     </div>
 
 

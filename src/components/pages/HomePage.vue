@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { store } from '../../store.js';
 import Jumbo from '../../components/Jumbo.vue';
-import SearchBar from '../SearchBar.vue';
 
 export default {
   data() {
@@ -15,7 +14,6 @@ export default {
 
   components: {
     Jumbo,
-    SearchBar
   },
 
   methods: {

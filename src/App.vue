@@ -1,7 +1,6 @@
 <script>
 
 import AppHeader from './components/AppHeader.vue';
-import SearchBar from './components/SearchBar.vue';
 import AppFooter from './components/AppFooter.vue';
 import Jumbo from './components/Jumbo.vue';
 
@@ -17,7 +16,6 @@ export default {
 
   components: {
     AppHeader,
-    SearchBar,
     AppFooter,
     Jumbo
 
