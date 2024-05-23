@@ -78,12 +78,6 @@ export default {
 <template>
 
   
-
-
-  
-  
-  
-  
   <div class="container">
     
     <div id="search-bar-wrapper" class="col-5">
@@ -139,7 +133,8 @@ export default {
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 30px;
+
+  transform: translate(0,-50%);
 }
 
 #search-bar-wrapper{
