@@ -18,13 +18,16 @@ export default {
 
   methods: {
    
-  }
+  },
+  
 }
 </script>
 
 <template>
  
   <Jumbo></Jumbo>
+
+  
 
 </template>
 
