@@ -53,21 +53,14 @@ export default {
 
     <footer>
         <div class="container py-5">
-
-
-            <!-- <div id="footer-title">
-                BoolBnB
-            </div> -->
-
-            <div class="d-flex justify-content-between">
-
-                <div class="d-flex flex-column">
-
-                    <div class="col-title">
-                        Membri
+            
+            <div class="row row-gap-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-title text-center text-md-start">
+                        <span>Membri</span>
                     </div>
-
-                    <div class="components">
+        
+                    <div class="components text-center text-md-start">
                         <ul>
                             <li v-for="member in members">
                                 <div class="name">
@@ -77,15 +70,14 @@ export default {
                             </li>
                         </ul>
                     </div>
+
                 </div>
-
-                <div class="d-flex flex-column">
-
-                    <div class="col-title">
-                        Contatti
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-title text-center text-md-start">
+                       <span>Contatti</span>
                     </div>
-
-                    <div class="components">
+        
+                    <div class="components text-center text-md-start">
                         <ul>
                             <li v-for="email in emails">
                                 {{ email }}
@@ -94,21 +86,24 @@ export default {
                     </div>
 
                 </div>
-
-                <div class="d-flex flex-column">
-                    <div class="col-title text-center">
-                        Social
-                    </div>
-
-                    <div id="social-grid">
-                        <div v-for="social in socials" class="icon">
-                            <i class="fa-brands" :class="social"></i>
+                <div class="col-12 col-md-4 col-lg-6">
+                    <div class="d-flex flex-column ">
+                        <div class="col-title text-center">
+                            <span>Social</span>
                         </div>
-
+        
+                        <div id="social-grid">
+                            <div v-for="social in socials" class="icon">
+                                <i class="fa-brands" :class="social"></i>
+                            </div>
+        
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
+
+            
         </div>
 
         <hr>
@@ -140,10 +135,13 @@ footer {
 
     margin-bottom: 36px;
     color: #006769c0;
+
+    
 }
 
 #social-grid {
     max-width: 200px;
+    margin: auto;
 
     display: flex;
     justify-content: center;
@@ -168,7 +166,7 @@ footer {
 
     .icon:hover {
         background-color: #006769c0;
-        color: black;
+        color: white;
         cursor: pointer;
     }
 
@@ -185,7 +183,22 @@ footer {
     font-size: 1.6em;
     font-weight: 600;
 
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    span{
+        position: relative;
+
+        &::before{
+    
+            content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 50px;
+                border-bottom: 3px solid #006769c0;
+        }
+    }
+
+    
 }
 
 .components {
