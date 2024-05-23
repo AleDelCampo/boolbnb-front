@@ -76,46 +76,67 @@ export default {
 </script>
 
 <template>
-  <!-- Visualizzazione dello store stampato sulla pagina per debugging
-  <div>
-    <pre>{{ store }}</pre> Mostra lo stato dello store in formato JSON 
-     </div> -->
-
+<!-- 
   <div class="container d-flex justify-content-center">
-    <nav class="navbar search-bar">
-      <div class="container-fluid">
+    <nav class="navbar search-bar"> -->
         <!-- Sezione per l'input di ricerca con menu a cascata -->
-        <div class="position-relative d-flex align-items-center gap-4">
+        <!-- <div class="position-relative w-100 d-flex align-items-center justify-content-between"> -->
           <!-- Campo di input per la ricerca di indirizzi -->
-          <input class="form-control ms-2" type="search" v-model="store.inputSearch"
+          <!-- <input class="form-control ms-2" type="search" v-model="store.inputSearch"
             placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
-            @blur="showDropdown = false">
-            {{console.log(latitude, longitude ) }}
-
-            <!-- <input type="range" id="radius" min="0" max="30" v-model="radius">{{ radius }}km -->
-            <!-- <FilterSearchBar></FilterSearchBar> -->
+            @blur="showDropdown = false"> -->
 
           <!-- test -->
 
-          <router-link :to="{ name: 'SearchPage' }" class="btn my_btn">
+          <!-- <router-link :to="{ name: 'SearchPage' }" class="btn my_btn me-2">
             Cerca
-          </router-link>
+          </router-link> -->
 
 
           <!-- Lista di suggerimenti mostrata come un menu a cascata -->
-          <ul class="list-group position-absolute w-100 menu-indirizzi" v-show="showDropdown">
+          <!-- <ul class="list-group position-absolute w-100 menu-indirizzi" v-show="showDropdown"> -->
             <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
-            <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item"
-              @mousedown="chooseAddress(item)">
-              {{ item }} <!-- Visualizza il suggerimento di indirizzo -->
-            </li>
+            <!-- <li class="list-group-item list-group-item-action" v-for="item in listItem" :key="item" -->
+              <!-- @mousedown="chooseAddress(item)"> -->
+              <!-- {{ item }}  -->
+              <!-- Visualizza il suggerimento di indirizzo -->
+            <!-- </li>
           </ul>
         </div>
+    </nav> -->
+  <!-- </div> -->
+
+
+
+  <div class="container">
+
+    <div id="search-bar-wrapper" class="col-5">
+
+      <div id="search-icon">
+        <i class="fa-solid fa-house"></i>
       </div>
-    </nav>
+
+      <div class="text">
+        <input class="search-input ms-2" type="search" v-model="store.inputSearch"
+            placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
+            @blur="showDropdown = false">
+      </div>
+
+      <div class="button">
+        <router-link :to="{ name: 'SearchPage' }" class="btn my_btn me-2">
+          Cerca
+        </router-link>
+      </div>
+
+    </div>
+
   </div>
+
+
+
+
 </template>
-<style>
+<style lang="scss"scoped>
 /* Stile per posizionare gli elementi in modo assoluto rispetto al loro contenitore /
 .position-relative {
   z-index: 1000;
@@ -126,6 +147,48 @@ export default {
 }
 
 / Stile per gli elementi della lista di suggerimenti, cambiando il cursore su pointer */
+
+.container{
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 30px;
+}
+
+#search-bar-wrapper{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  padding:20px 30px;
+
+  border:1px solid #006769c0;
+  border-radius: 40px;
+
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+  background-color: white;
+
+  #search-icon{
+    color:#006769c0;
+  }
+
+  .search-input{
+    border: none;
+    border-bottom:1px solid rgba(0, 0, 0, 0.23);
+    transition: .3s;
+
+      &:focus{
+        outline:none;
+        border-bottom:1px solid black;
+      }
+  }
+
+}
+
+
 .list-group-item {
   cursor: pointer;
 }
@@ -136,7 +199,6 @@ export default {
 
 .search-bar {
   border-radius: 12px;
-  width: 50%;
   position: relative;
   bottom: 28px;
 }
