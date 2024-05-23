@@ -47,17 +47,88 @@ export default {
 <template>
   <div>
     <div v-if="apartment" class="container py-5">
+
+      <div class="col-md-6 mb-4">
+        <div v-if="apartment.slug" class="p-3 border-start">
+          <h2>{{ apartment.title }}</h2>
+
+          <div class="col-md-6 mb-4">
+            <div  class="position-relative overflow-hidden border border-success rounded">
+              <div class="single-image">
+                
+                <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
+                
+              
+              </div>
+    
+            </div>
+
+            <!-- <div v-else class="border border-danger rounded p-3">
+                No image
+            </div>
+            <div class="py-4">
+                <router-link :to="{name: 'HomePage'}" class="btn btn-outline-light text-uppercase fw-bold" >
+                        Back Home
+                </router-link>
+            </div> -->
+           
+         </div>
+         <h4>{{ apartment.address }}</h4>
+         <div class="row">
+          <div class="col-2">
+            <p><strong>{{ apartment.n_rooms }} </strong> stanze</p>
+
+          </div>
+          <div class="col-2">
+            <p><strong>{{ apartment.n_beds }}</strong> letti</p>
+
+          </div>
+          <div class="col-2">
+            <p><strong>{{ apartment.n_bathrooms }}</strong> bagni</p>
+
+          </div>
+          <div class="col-6">
+ 
+            <p><strong>{{ apartment.squared_meters }} </strong>metri quadrati</p>
+          </div>
+         </div>
+ 
+  
+          <div v-if="apartment.user">
+            <p><strong class="text">Nome dell' host</strong>{{ apartment.user.name }}</p>
+          </div>
+          <p v-else><strong class="text">Nome del'host</strong> No owner information available</p>
+          <p>{{ apartment.description }}</p>
+  
+  
+  
+          <div v-if="apartment.services && apartment.services.length !== 0">
+            <strong class="text">Services</strong><span v-for="service in apartment.services">{{ service.name
+              }}</span>
+          </div>
+          <p v-else><strong class="text">Services:</strong> No extra services</p>
+  
+        </div>
+        <div class="p-3">
+          <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contattami</router-link>
+        </div>
+
+      </div>
+
+
       <div class="row">
         <!-- Immagine -->
         <div class="col-md-6 mb-4">
-            <div  class="position-relative overflow-hidden border border-success rounded">
-              <div class="single-image">
-                  <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
-                  
-              <div class="mask "></div>
-              
+          <div  class="position-relative overflow-hidden border border-success rounded">
+            <div class="single-image">
+               <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
+               <div class="mask ">
+                 
+               </div>
+               
+            
             </div>
-
+  
           </div>
 
             <!-- <div v-else class="border border-danger rounded p-3">
@@ -72,7 +143,7 @@ export default {
         </div>
 
         <!-- Dettagli appartamento -->
-        <div class="col-md-6 mb-4">
+        <!-- <div class="col-md-6 mb-4">
           <div v-if="apartment.slug" class="p-3 border-start">
             <h2>{{ apartment.title }}</h2>
 
@@ -101,7 +172,7 @@ export default {
           <div class="p-3">
             <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contattami</router-link>
           </div>
-        </div>
+        </div> -->
       </div>
 
     </div>
