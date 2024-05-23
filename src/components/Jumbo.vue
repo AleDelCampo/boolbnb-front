@@ -70,8 +70,7 @@ export default {
                         </h1>
                         <p class="p-3 slide-left-r">
                             {{ currentSlide.text }}
-                            <!-- Immergiti nella grande varietà di appartamenti disposti su tutto il territorio nazionale. Imposta la
-                            posizione e le tue esigenze e scegli l'appartamento per te. -->
+                            
                         </p>
                         
                             
@@ -80,12 +79,11 @@ export default {
                 </div>
             </div>        
         </div>
-        <SearchBar></SearchBar>
     </div>
-
+    
+    <SearchBar></SearchBar>
     
 
-    <!-- <SearchBar></SearchBar> -->
 
 </template>
 
@@ -101,7 +99,6 @@ export default {
     background-position: center;
     
     
-    // background-image: url('https://hips.hearstapps.com/hmg-prod/images/moderna-casa-vacanze-minorca-panorama-1556372941.jpg?crop=1xw:0.9990253411306043xh;center,top&resize=1200:*');
     
     &::before{
         content: '';
