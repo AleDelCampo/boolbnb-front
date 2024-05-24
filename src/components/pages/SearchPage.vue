@@ -43,6 +43,9 @@ export default {
   },
   methods: {
 
+    // getIdMessage(){
+    //   store.
+    // }
   },
 }
 </script>
@@ -56,9 +59,9 @@ export default {
             <FilterSearchBar></FilterSearchBar>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4 py-4" v-for="apartment in store.apartments" :key="apartment.slug">
+            <div class="col-md-6 col-lg-3 mb-4 py-4" v-for="apartment in store.apartments" :key="apartment.slug" >
             <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class="text-decoration-none">
-              <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden card-cover">
+              <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden card-cover" @click="store.idMessage = apartment.id">
                     <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="card-img-top" alt="Listing Image">
                     <span class="distance">{{apartment.distance.toFixed(2)}}km</span>
                     <div class="card-img-overlay d-flex flex-column justify-content-end p-3 transition-overlay">
