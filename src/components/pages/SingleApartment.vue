@@ -2,8 +2,15 @@
 import axios from 'axios';
 import { store } from '../../store';
 
+import ContactForm from '../ContactForm.vue';
+
+
 export default {
   name: 'SingleApartment',
+
+  components: {
+    ContactForm
+  },
 
   data() {
     return {
@@ -22,6 +29,7 @@ export default {
         if (res.data.success) {
           // Se l'appartamento viene trovato, salvalo
           this.apartment = res.data.apartment;
+          console.log(res.data.apartment)
         } else {
           // Se l'appartamento non viene trovato, reindirizza alla homepage
           this.$router.push({ name: 'HomePage' });
@@ -49,8 +57,9 @@ export default {
     <div v-if="apartment" class="container">
 
       <div v-if="apartment.slug" >
-        <h1 class="py-3">{{ apartment.title }}</h1>
+        <h1 class="py-4">{{ apartment.title }}</h1>
 
+        <!-- immagine -->
         <div  class="position-relative overflow-hidden border border-success rounded">
           <div class="single-image">
             
@@ -69,56 +78,83 @@ export default {
               <router-link :to="{name: 'HomePage'}" class="btn btn-outline-light text-uppercase fw-bold" >
                       Back Home
               </router-link>
-          </div> -->
-         
-       </div>
-       <h4>{{ apartment.address }}</h4>
-       <div class="row py-2">
-          <div class="col-2">
-            <p><strong>{{ apartment.n_rooms }} </strong> stanze</p>
-
-          </div>
-          <div class="col-2">
-            <p><strong>{{ apartment.n_beds }}</strong> letti</p>
-
-          </div>
-          <div class="col-2">
-            <p><strong>{{ apartment.n_bathrooms }}</strong> bagni</p>
-
-          </div>
-          <div class="col-6">
-
-            <p><strong>{{ apartment.squared_meters }} </strong>metri quadrati</p>
-          </div>
-       </div>
-
-       <hr>
-
-
-        <div v-if="apartment.user">
-          <p><strong class="text">Nome dell' host</strong>{{ apartment.user.name }}</p>
+          </div> -->         
         </div>
-        <p v-else><strong class="text">Nome del'host</strong> No owner information available</p>
-        <hr>
 
-        <p>{{ apartment.description }}</p>
+        <div class="row pt-2 pb-4 mb-2">
+          <div class="col-12 col-md-12 col-lg-6">
+           <h4>{{ apartment.address }}</h4>
+
+           <div class="row py-3">
+             <div class="col-3 pe-4">
+              <p class="text-center"><strong class="separator">{{ apartment.n_rooms }} </strong> stanze</p>
+    
+             </div>
+             <div class="col-3 p-0 pe-4">
+              <p class="text-center"><strong class="separator">{{ apartment.n_beds }}</strong> letti</p>
+    
+             </div>
+             <div class="col-3 p-0 pe-4">
+              <p class="text-center"><strong class="separator">{{ apartment.n_bathrooms }}</strong> bagni</p>
+    
+             </div>
+             <div class="col-3 p-0">
+    
+              <p class="text-center"><strong>{{ apartment.squared_meters }} </strong> m^2</p>
+             </div>
+           </div>
+
+            <div v-if="apartment.services && apartment.services.length !== 0">
+              <strong class="text">Servizi extra disponibili</strong> 
+              <div class="row py-3">
+                <div v-for="service in apartment.services" class="col-2">
+                  <div class="text-center"><i :class="service.icon"></i></div>
+                  <div class="text-center">{{ service.name }}</div>
+
+                </div>
+
+              </div>
+            </div>
+            <p v-else><strong class="text">Nessun servizio extra disponibile</strong></p>
+  
+           
+  
+  
+            <hr>
+            <div v-if="apartment.user">
+              <p><strong class="text host">Nome dell' host</strong>{{ apartment.user.name }}</p>
+            </div>
+            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
+            <hr>
+           
+
+           <p>{{ apartment.description }}</p>
+
+          </div>
+
+          <div class="col-12 col-md-12 col-lg-6">
+
+            <div class="box border p-3 rounded-2 ">
+              <h4 class="text-center">Contatta l'host</h4 class="text-center">
+  
+              <ContactForm></ContactForm>
+
+            </div>
+
+            
+          </div>
 
 
-
-
-        <div v-if="apartment.services && apartment.services.length !== 0">
-          <strong class="text">Servizi extra disponibili</strong> <span v-for="service in apartment.services">{{ service.name
-            }}</span>
+ 
         </div>
-        <p v-else><strong class="text">Nessun servizio extra disponibile</strong></p>
+
+       
 
       </div>
-      <div class="p-3">
+      <!-- <div class="p-3">
         <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contatta l' host</router-link>
-      </div>
-      <div class="">
-
-      </div>
+      </div> -->
+      
 
     </div>
 
@@ -148,4 +184,26 @@ export default {
 .text {
   color: #006769c0;
 }
+
+p{  
+  position: relative;
+
+  .separator::before{
+    content: "";
+              position: absolute;
+              right: -10px;
+              height: 100%;
+              border-right: 1px solid #006769c0;
+  }
+}
+
+.box{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.host{
+  margin-right: 1em;
+  border-bottom: 2px solid #006769c0;
+}
+
 </style>
