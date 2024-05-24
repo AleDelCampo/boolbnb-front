@@ -85,6 +85,7 @@ export default {
 nav {
 
     background-color:white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
    
 
     #logo {
@@ -112,19 +113,9 @@ nav {
                 align-items: center;
 
                 padding-bottom: 5px;
-
+              
 
                 
-
-                .router{
-                    text-decoration: none;
-
-                    color: #006769c0;
-
-                    &:hover{
-                        color: black;
-                    }
-                }
 
 
             }
@@ -134,48 +125,7 @@ nav {
 
     }
 
-    .link-be {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        padding-inline: 20px;
-        background-color: white;
     
-    
-        div {
-            padding: 10px;
-            padding-right: 40px;
-            padding-left: 20px;
-    
-            margin-right: 10px;
-            border-right: 1px solid black;
-    
-        }
-    
-        span {
-            margin-left: 10px;
-            opacity: 1;
-            
-            transition: opacity 0.3s ease, transform 0.3s ease;
-    
-    
-        }
-    
-        &:hover {
-    
-            div {
-                border-right: 1px solid transparent;
-    
-            }
-    
-            span {
-    
-                opacity: 0;
-                transform: translate(100%);
-    
-            }
-        }
-    }
 
     
 }

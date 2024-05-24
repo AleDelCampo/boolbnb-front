@@ -64,8 +64,11 @@ export default {
         <label for="message">Messaggio</label>
     </div>
 
+    <div class="d-flex justify-content-end py-3 pe-5 ">
+      <button type="submit" class="router cta link-be"><strong>Invia</strong><span><i class="fa-solid fa-arrow-right"></i></span></button>
 
-    <button type="submit" class="btn my_btn">Invia</button>
+    </div>
+
 
 </form>
 
@@ -73,5 +76,17 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.cta{
+  padding-block: 5px;
+  padding-inline: 40px;
+  border: 2px solid #006769c0;
+  border-radius: 10px;
+
+  &:hover{
+    background-color: #006769c0;
+    color: white;
+  }
+}
 
 </style>

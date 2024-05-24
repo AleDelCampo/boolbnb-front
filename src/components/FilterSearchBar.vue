@@ -122,7 +122,8 @@ export default {
                             <input  type="checkbox" class="btn-check prova" name="services[]" :id="`service-${service.id}`" :value="service.id" @change="toggleService(service.id)"> 
                             <label :for="`service-${service.id}`" class="service-btn label-btn" >
                                 <div class="icon">
-                                    <i class="fa-solid fa-wifi"></i>
+                                    <i :class="service.icon"></i>
+                                    
                                 </div>
                                 <div class="name">
                                     {{ service.name }}

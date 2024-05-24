@@ -2,8 +2,15 @@
 import axios from 'axios';
 import { store } from '../../store';
 
+import ContactForm from '../ContactForm.vue';
+
+
 export default {
   name: 'SingleApartment',
+
+  components: {
+    ContactForm
+  },
 
   data() {
     return {
@@ -22,6 +29,7 @@ export default {
         if (res.data.success) {
           // Se l'appartamento viene trovato, salvalo
           this.apartment = res.data.apartment;
+          console.log(res.data.apartment)
         } else {
           // Se l'appartamento non viene trovato, reindirizza alla homepage
           this.$router.push({ name: 'HomePage' });
@@ -46,63 +54,107 @@ export default {
 
 <template>
   <div>
-    <div v-if="apartment" class="container py-5">
-      <div class="row">
-        <!-- Immagine -->
-        <div class="col-md-6 mb-4">
-            <div  class="position-relative overflow-hidden border border-success rounded">
-              <div class="single-image">
-                  <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
-                  
-              <div class="mask "></div>
-              
-            </div>
+    <div v-if="apartment" class="container">
 
+      <div v-if="apartment.slug" >
+        <h1 class="py-4">{{ apartment.title }}</h1>
+
+        <!-- immagine -->
+        <div  class="position-relative overflow-hidden border border-success rounded">
+          <div class="single-image">
+            
+            <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
+            
+          
           </div>
 
-            <!-- <div v-else class="border border-danger rounded p-3">
-                No image
-            </div>
-            <div class="py-4">
-                <router-link :to="{name: 'HomePage'}" class="btn btn-outline-light text-uppercase fw-bold" >
-                        Back Home
-                </router-link>
-            </div> -->
-           
+        </div>
+        <div class="col-md-6 mb-4">
+
+          <!-- <div v-else class="border border-danger rounded p-3">
+              No image
+          </div>
+          <div class="py-4">
+              <router-link :to="{name: 'HomePage'}" class="btn btn-outline-light text-uppercase fw-bold" >
+                      Back Home
+              </router-link>
+          </div> -->         
         </div>
 
-        <!-- Dettagli appartamento -->
-        <div class="col-md-6 mb-4">
-          <div v-if="apartment.slug" class="p-3 border-start">
-            <h2>{{ apartment.title }}</h2>
+        <div class="row pt-2 pb-4 mb-2">
+          <div class="col-12 col-md-12 col-lg-6">
+           <h4>{{ apartment.address }}</h4>
 
-            <div v-if="apartment.user">
-              <p><strong class="text">Owner: </strong>{{ apartment.user.name }}</p>
-            </div>
-            <p v-else><strong class="text">Owner:</strong> No owner information available</p>
-            <p>{{ apartment.description }}</p>
-
-            <h3>Details</h3>
-            <p><strong class="text">Num. of Rooms: </strong>{{ apartment.n_rooms }}</p>
-            <p><strong class="text">Num. of Beds: </strong>{{ apartment.n_beds }}</p>
-            <p><strong class="text">Num. of Bathrooms: </strong>{{ apartment.n_bathrooms }}</p>
-            <p><strong class="text">SQM Apartment: </strong>{{ apartment.squared_meters }}</p>
-
-            <p><strong class="text">Address: </strong>{{ apartment.address }}</p>
-
+           <div class="row py-3">
+             <div class="col-3 pe-4">
+              <p class="text-center"><strong class="separator">{{ apartment.n_rooms }} </strong> stanze</p>
+    
+             </div>
+             <div class="col-3 p-0 pe-4">
+              <p class="text-center"><strong class="separator">{{ apartment.n_beds }}</strong> letti</p>
+    
+             </div>
+             <div class="col-3 p-0 pe-4">
+              <p class="text-center"><strong class="separator">{{ apartment.n_bathrooms }}</strong> bagni</p>
+    
+             </div>
+             <div class="col-3 p-0">
+    
+              <p class="text-center"><strong>{{ apartment.squared_meters }} </strong> m^2</p>
+             </div>
+           </div>
 
             <div v-if="apartment.services && apartment.services.length !== 0">
-              <strong class="text">Services</strong><span v-for="service in apartment.services">{{ service.name
-                }}</span>
+              <strong class="text">Servizi extra disponibili</strong> 
+              <div class="row py-3">
+                <div v-for="service in apartment.services" class="col-2">
+                  <div class="text-center"><i :class="service.icon"></i></div>
+                  <div class="text-center">{{ service.name }}</div>
+
+                </div>
+
+              </div>
             </div>
-            <p v-else><strong class="text">Services:</strong> No extra services</p>
+            <p v-else><strong class="text">Nessun servizio extra disponibile</strong></p>
+  
+           
+  
+  
+            <hr>
+            <div v-if="apartment.user">
+              <p><strong class="text host">Nome dell' host</strong>{{ apartment.user.name }}</p>
+            </div>
+            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
+            <hr>
+           
+
+           <p>{{ apartment.description }}</p>
 
           </div>
-          <div class="p-3">
-            <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contattami</router-link>
+
+          <div class="col-12 col-md-12 col-lg-6">
+
+            <div class="box border p-3 rounded-2 ">
+              <h4 class="text-center">Contatta l'host</h4 class="text-center">
+  
+              <ContactForm></ContactForm>
+
+            </div>
+
+            
           </div>
+
+
+ 
         </div>
+
+       
+
       </div>
+      <!-- <div class="p-3">
+        <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contatta l' host</router-link>
+      </div> -->
+      
 
     </div>
 
@@ -132,4 +184,26 @@ export default {
 .text {
   color: #006769c0;
 }
+
+p{  
+  position: relative;
+
+  .separator::before{
+    content: "";
+              position: absolute;
+              right: -10px;
+              height: 100%;
+              border-right: 1px solid #006769c0;
+  }
+}
+
+.box{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.host{
+  margin-right: 1em;
+  border-bottom: 2px solid #006769c0;
+}
+
 </style>
