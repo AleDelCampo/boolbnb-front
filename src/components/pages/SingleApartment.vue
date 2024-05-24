@@ -19,6 +19,7 @@ export default {
 
   data() {
     return {
+      store,
       apartment: null,
       apartmentSlug: null,
       baseApiUrl: 'http://127.0.0.1:8000/api/',
@@ -38,6 +39,11 @@ export default {
           // Se l'appartamento viene trovato, salvalo
           this.apartment = res.data.apartment;
           console.log(this.apartment)
+
+          store.latitudeMap = res.data.apartment.latitude
+          store.longitudeMap = res.data.apartment.longitude
+
+
         } else {
           // Se l'appartamento non viene trovato, reindirizza alla homepage
           this.$router.push({ name: 'HomePage' });
@@ -49,26 +55,13 @@ export default {
       });
       // console.log(this.apartment);
 
-      // const center = [12.488259, 41.892630];
-
-      // const map = tt.map({
-      //   key: 'vo4DvtQcoR20QZg6FGxev9COwz3jyip2',
-      //   container: 'map',
-      //   center: center   ,
-      //   zoom: 16,
-      // });
-
-      // map.on('load', ()=>{
-      //   new tt.Marker().setLngLat(center).addTo(map)
-
-      // })
+      
   },
 
   methods: {
     catchId(id) {
         store.idMessage = ''
         store.idMessage = id
-        // console.log(store.idMessage)
     },
 
   },

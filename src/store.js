@@ -7,10 +7,16 @@ export const store = reactive({
   apartmentsAddress: [], // Appartamenti trovati vicino all'indirizzo
   apartments: [], // Lista di appartamenti trovati tramite la ricerca
 
-  latitude:null,
-  longitude:null,
+  //per il filtro
+  latitude: null,
+  longitude: null,
 
+  //per prendere l'id dell'appartamento a cui mandare il messaggio
   idMessage: '',
+
+  //lat e lon per coordinate mappa
+  latitudeMap: null,
+  longitudeMap: null,
 
 
   inputRooms: '',

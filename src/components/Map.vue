@@ -1,6 +1,8 @@
 <script>
 
 import tt from '@tomtom-international/web-sdk-maps';
+import { store } from '../store';
+
 
 
 
@@ -9,6 +11,7 @@ export default {
 
     data() {
         return {
+            store,
             
         }
     },
@@ -21,7 +24,8 @@ export default {
     
     mounted(){
 
-        const center = [12.488259, 41.892630];
+        // const center = [12.488259, 41.892630];
+        const center = [store.longitudeMap, store.latitudeMap];
 
         const map = tt.map({
             key: 'vo4DvtQcoR20QZg6FGxev9COwz3jyip2',
@@ -33,7 +37,9 @@ export default {
         map.on('load', ()=>{
             new tt.Marker().setLngLat(center).addTo(map)
 
-        })
+        });
+
+        
         
     }
 }
