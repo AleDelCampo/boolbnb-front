@@ -55,12 +55,18 @@ export default {
     });
       // console.log(this.apartment);
 
-    axios.post(this.baseApiUrl + 'visits/store',{
-      ip:'192.168.1.1',
-      apartment: store.idMessage
-    }).then(res=>{
-      console.log(res)
+    fetch('https://api.ipify.org/?format=json')
+    .then(response => response.json())
+    .then(data => {
+      store.ipAddress = data.ip;
+      console.log(data.ip);
+      // console.log(this.ip)
+      this.sendToDb();
+    })
+    .catch(error => {
+      console.error('Error fetching IP:', error);
     });
+      
 
       
   },
@@ -70,6 +76,17 @@ export default {
         store.idMessage = ''
         store.idMessage = id
     },
+
+    sendToDb(){
+      axios.post(this.baseApiUrl + 'visits/store',{
+      ip: store.ipAddress,
+      apartment: store.idMessage
+    }).then(res=>{
+      console.log(res.data)
+    });
+
+
+    }
 
   },
 }

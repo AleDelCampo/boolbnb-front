@@ -13,6 +13,8 @@ export const store = reactive({
 
   //per prendere l'id dell'appartamento a cui mandare il messaggio
   idMessage: '',
+  ipAddress: '',
+
 
   //lat e lon per coordinate mappa
   latitudeMap: null,
