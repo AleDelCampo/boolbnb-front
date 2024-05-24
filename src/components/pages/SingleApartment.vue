@@ -3,23 +3,32 @@ import axios from 'axios';
 import { store } from '../../store';
 
 import ContactForm from '../ContactForm.vue';
+import Map from  '../Map.vue';
+
+import tt from '@tomtom-international/web-sdk-maps';
+
 
 
 export default {
   name: 'SingleApartment',
 
   components: {
-    ContactForm
+    ContactForm,
+    Map
   },
 
   data() {
     return {
+      store,
       apartment: null,
       apartmentSlug: null,
-      baseApiUrl: 'http://127.0.0.1:8000/api/'
+      baseApiUrl: 'http://127.0.0.1:8000/api/',
+      
     }
   },
   mounted() {
+
+    
     // Recupera lo slug dell'appartamento dall'URL
     this.apartmentSlug = this.$route.params.slug;
 
@@ -29,7 +38,12 @@ export default {
         if (res.data.success) {
           // Se l'appartamento viene trovato, salvalo
           this.apartment = res.data.apartment;
-          console.log(res.data.apartment)
+          console.log(this.apartment)
+
+          store.latitudeMap = res.data.apartment.latitude
+          store.longitudeMap = res.data.apartment.longitude
+
+
         } else {
           // Se l'appartamento non viene trovato, reindirizza alla homepage
           this.$router.push({ name: 'HomePage' });
@@ -40,24 +54,34 @@ export default {
         // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
       });
       // console.log(this.apartment);
+
+      
   },
 
   methods: {
     catchId(id) {
         store.idMessage = ''
         store.idMessage = id
-        // console.log(store.idMessage)
-    }
+    },
+
   },
 }
+
+
+
 </script>
 
 <template>
-  <div>
-    <div v-if="apartment" class="container">
 
+  
+  
+  <div>
+    <div v-if="apartment" class="container" >
+      
       <div v-if="apartment.slug" >
-        <h1 class="py-4">{{ apartment.title }}</h1>
+        
+
+        <h1  class="py-4">{{ apartment.title }}</h1>
 
         <!-- immagine -->
         <div  class="position-relative overflow-hidden border border-success rounded">
@@ -104,33 +128,50 @@ export default {
              </div>
            </div>
 
-            <div v-if="apartment.services && apartment.services.length !== 0">
-              <strong class="text">Servizi extra disponibili</strong> 
-              <div class="row py-3">
-                <div v-for="service in apartment.services" class="col-2">
-                  <div class="text-center"><i :class="service.icon"></i></div>
-                  <div class="text-center">{{ service.name }}</div>
+           <div class="row">
+             <div v-if="apartment.services && apartment.services.length !== 0">
+               <strong class="text">Servizi extra disponibili</strong> 
+               <div class="row py-3">
+                 <div v-for="service in apartment.services" class="col-2">
+                   <div class="text-center"><i :class="service.icon"></i></div>
+                   <div class="text-center">{{ service.name }}</div>
+  
+                 </div>
+  
+               </div>
+             </div>
+             <p v-else><strong class="text">Nessun servizio extra disponibile</strong></p>
 
-                </div>
+           </div>
 
-              </div>
+
+           
+           <hr>
+           <div v-if="apartment.user_name">
+             <p><strong class="text host">Nome dell' host</strong>{{ apartment.user_name }} {{apartment.user_surname }}</p>
+           </div>
+           <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
+           <hr>
+          
+
+            <p>{{ apartment.description }}</p>
+
+            <div class="row justify-content-center">
+
+              <Map></Map>
+
             </div>
-            <p v-else><strong class="text">Nessun servizio extra disponibile</strong></p>
+
   
            
   
   
-            <hr>
-            <div v-if="apartment.user_name">
-              <p><strong class="text host">Nome dell' host</strong>{{ apartment.user_name }} {{apartment.user_surname }}</p>
-            </div>
-            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
-            <hr>
+
            
-
-           <p>{{ apartment.description }}</p>
-
+           
+           
           </div>
+          
 
           <div class="col-12 col-md-12 col-lg-6">
 
