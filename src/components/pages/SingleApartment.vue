@@ -34,26 +34,33 @@ export default {
 
     // Effettua la richiesta per ottenere i dettagli dell'appartamento
     axios.get(this.baseApiUrl + 'apartments/' + this.apartmentSlug)
-      .then(res => {
-        if (res.data.success) {
-          // Se l'appartamento viene trovato, salvalo
-          this.apartment = res.data.apartment;
-          console.log(this.apartment)
+    .then(res => {
+      if (res.data.success) {
+        // Se l'appartamento viene trovato, salvalo
+        this.apartment = res.data.apartment;
+        console.log(this.apartment)
 
-          store.latitudeMap = res.data.apartment.latitude
-          store.longitudeMap = res.data.apartment.longitude
+        store.latitudeMap = res.data.apartment.latitude
+        store.longitudeMap = res.data.apartment.longitude
 
 
-        } else {
-          // Se l'appartamento non viene trovato, reindirizza alla homepage
-          this.$router.push({ name: 'HomePage' });
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching apartment details:', error);
-        // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
-      });
+      } else {
+        // Se l'appartamento non viene trovato, reindirizza alla homepage
+        this.$router.push({ name: 'HomePage' });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching apartment details:', error);
+      // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
+    });
       // console.log(this.apartment);
+
+    axios.post(this.baseApiUrl + 'visits/store',{
+      ip:'192.168.1.1',
+      apartment: store.idMessage
+    }).then(res=>{
+      console.log(res)
+    });
 
       
   },
