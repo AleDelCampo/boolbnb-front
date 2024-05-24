@@ -121,8 +121,8 @@ export default {
   
   
             <hr>
-            <div v-if="apartment.user">
-              <p><strong class="text host">Nome dell' host</strong>{{ apartment.user.name }}</p>
+            <div v-if="apartment.user_name">
+              <p><strong class="text host">Nome dell' host</strong>{{ apartment.user_name }} {{apartment.user_surname }}</p>
             </div>
             <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
             <hr>
