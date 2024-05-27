@@ -84,7 +84,7 @@ export default {
   
   <div class="container">
     
-    <div id="search-bar-wrapper" class="col-s-8 col-lg-5">
+    <div id="search-bar-wrapper" class="col-sm-8 col-lg-5">
       
       <div id="search-icon">
         <i class="fa-solid fa-house"></i>

@@ -40,34 +40,21 @@ export default {
       <SearchBar></SearchBar>
       <FilterSearchBar></FilterSearchBar>
     </div>
+    
 
-    <div class="row">
-      <ApartmentCard
+    <div class="row row-gap-5 gap-4 justify-content-center pb-4 mt-1 mb-5">
+      <ApartmentCard  
+      class="col-12 col-sm-6 col-md-4 col-lg-3"     
       v-for="currentApartment in store.apartments"
       :apartment="currentApartment"
-      :key="currentApartment.slug">
-    </ApartmentCard>
+      :key="currentApartment.slug"
+      ></ApartmentCard>
+
     </div>
     
   </div>
 </template>
-<!-- <div class="row">
-    <div class="col-md-6 col-lg-3 mb-4 py-4" v-for="apartment in store.apartments" :key="apartment.slug" >
-    <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class="text-decoration-none">
-      <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden card-cover" @click="store.idMessage = apartment.id">
-            <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="card-img-top" alt="Listing Image">
-            <span class="distance">{{apartment.distance.toFixed(2)}}km</span>
-            <div class="card-img-overlay d-flex flex-column justify-content-end p-3 transition-overlay">
-                <div class="apartment-details p-2 mt-2">
-                    <p class="card-text  mb-1 text-white font-weight">{{ apartment.address }}</p>
-                </div>
-            </div>
-            <div class="overlay"></div>
-        </div>
-        <h6 class="card-title  text-uppercase text-center pt-2">{{ apartment.title }}</h6>
-    </router-link>
-  </div>
-</div> -->
+
 
 <style lang="scss" scoped>
 
