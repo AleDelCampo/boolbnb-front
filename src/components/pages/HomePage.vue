@@ -25,13 +25,6 @@ export default {
 
   created(){
 
-    // axios.get(this.baseApiUrl + 'apartments').then(res => {
-    //   store.apartments = res.data.results;
-
-    //   console.log(res.data.results)
-
-
-    // });
 
     axios.get('http://127.0.0.1:8000/api/show-sponsored', {
           params: { latitude: "41.89056", longitude: "12.49427", radius:"20000"}
@@ -55,13 +48,17 @@ export default {
  
   <Jumbo></Jumbo>
 
-  <div class="row">
-    <ApartmentCard
-    v-for="currentApartment in store.apartments"
-    :apartment="currentApartment"
-    :key="currentApartment.slug"
-    ></ApartmentCard>
+  <div class="container">
 
+    <div class="row row-gap-5">
+      <ApartmentCard  
+      class="col-12 col-sm-6 col-md-4 col-lg-3"     
+      v-for="currentApartment in store.apartments"
+      :apartment="currentApartment"
+      :key="currentApartment.slug"
+      ></ApartmentCard>
+
+    </div>
   </div>
 
   
