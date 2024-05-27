@@ -95,7 +95,7 @@ export default {
         placeholder="Inserisci un indirizzo..." @input="apiCall" @focus="showDropdown = true"
         @blur="showDropdown = false">
         <!-- Lista di suggerimenti mostrata come un menu a cascata -->
-        <ul class="list-group position-absolute w-100 menu-indirizzi" v-show="showDropdown">
+        <ul class="list-group position-absolute " v-show="showDropdown">
           <!-- Itera su ogni elemento in listItem per creare un elemento della lista -->
           <li class="list-group-item list-group-item-action" v-for="item in listItem" 
              @mousedown="chooseAddress(item)">
@@ -223,11 +223,4 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 }
 
-.menu-indirizzi{
-  left:0;
-  top:0;
-  z-index: 2;
-
-  transform: translate(0,37px);
-}
 </style>

@@ -81,7 +81,7 @@ export default {
         </div>
     </div>
     
-    <SearchBar></SearchBar>
+    <SearchBar class="position-relative z-3"></SearchBar>
     
 
 
