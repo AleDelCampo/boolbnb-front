@@ -48,9 +48,13 @@ export default {
       // Nasconde il menù
       this.showDropdown = false;
       // Trova l'indirizzo selezionato nella lista degli indirizzi memorizzati
+      
+    },
+
+    runSearch(){
       const selectedAddress = this.store.addresses.find(address => {
         // Verifica se l'indirizzo corrente ha lo stesso freeformAddress di item
-        return address.address.freeformAddress === item;
+        return address.address.freeformAddress === this.store.inputSearch;
       });
       // Se è stato trovato un indirizzo corrispondente in addresses
       if (selectedAddress) {
@@ -102,7 +106,7 @@ export default {
       </div>
 
       <div class="button">
-        <router-link :to="{ name: 'SearchPage' }" class="btn my_btn me-2">
+        <router-link :to="{ name: 'SearchPage' }" @click=" runSearch()" class="btn my_btn me-2">
           Cerca
         </router-link>
       </div>
