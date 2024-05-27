@@ -111,7 +111,7 @@ export default {
         <div  class="position-relative overflow-hidden border border-success rounded">
           <div class="single-image">
             
-            <img :src="'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
+            <img :src="apartment.image == null ? '/public/No-Image-Placeholder.svg.png' : 'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
             
           
           </div>
@@ -186,13 +186,6 @@ export default {
 
             </div>
 
-  
-           
-  
-  
-
-           
-           
            
           </div>
           
