@@ -5,7 +5,7 @@ import ContactForm from '../ContactForm.vue';
 import Map from '../Map.vue';
 
 export default {
-  
+
   name: 'SingleApartment',
   components: {
     ContactForm,
@@ -32,6 +32,8 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.apartment = res.data.apartment;
+            store.latitudeMap = res.data.apartment.latitude;
+            store.longitudeMap = res.data.apartment.longitude;
           } else {
             this.$router.push({ name: 'HomePage' });
           }
@@ -39,7 +41,6 @@ export default {
     },
 
     sendVisitToServer() {
-      
       fetch('https://api.ipify.org/?format=json')
         .then(response => response.json())
         .then(data => {
@@ -64,24 +65,15 @@ export default {
 
   <div>
     <div v-if="apartment" class="container">
-
       <div v-if="apartment.slug">
-
-
         <h1 class="py-4">{{ apartment.title }}</h1>
-
-        <!-- immagine -->
         <div class="position-relative overflow-hidden border border-success rounded">
           <div class="single-image">
-            
             <img :src="apartment.image == null ? '/public/No-Image-Placeholder.svg.png' : 'http://127.0.0.1:8000/storage/' + apartment.image" class="img-fluid" alt="Cover Image">
-            
-          
           </div>
-
         </div>
-        <div class="col-md-6 mb-4">
 
+        <div class="col-md-6 mb-4">
           <!-- <div v-else class="border border-danger rounded p-3">
               No image
           </div>
@@ -93,24 +85,21 @@ export default {
         </div>
 
         <div class="row pt-2 pb-4 mb-2">
+
           <div class="col-12 col-md-12 col-lg-6">
             <h4>{{ apartment.address }}</h4>
 
             <div class="row py-3">
               <div class="col-3 pe-4">
                 <p class="text-center"><strong class="separator">{{ apartment.n_rooms }} </strong> stanze</p>
-
               </div>
               <div class="col-3 p-0 pe-4">
                 <p class="text-center"><strong class="separator">{{ apartment.n_beds }}</strong> letti</p>
-
               </div>
               <div class="col-3 p-0 pe-4">
                 <p class="text-center"><strong class="separator">{{ apartment.n_bathrooms }}</strong> bagni</p>
-
               </div>
               <div class="col-3 p-0">
-
                 <p class="text-center"><strong>{{ apartment.squared_meters }} </strong> m^2</p>
               </div>
             </div>
@@ -122,54 +111,41 @@ export default {
                   <div v-for="service in apartment.services" class="col-2">
                     <div class="text-center"><i :class="service.icon"></i></div>
                     <div class="text-center">{{ service.name }}</div>
-
                   </div>
-
                 </div>
               </div>
               <p v-else><strong class="text">Nessun servizio extra disponibile</strong></p>
-
             </div>
 
             <hr>
 
             <div v-if="apartment.user_name">
-              <p><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong>{{ apartment.user_name }}
-                {{ apartment.user_surname }}</p>
+              <p><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong>{{ apartment.user_name }} {{ apartment.user_surname }}</p>
             </div>
-            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner
-              information available</p>
+
+            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
+
             <hr>
 
             <p>{{ apartment.description }}</p>
 
             <div class="row justify-content-center">
-
               <Map></Map>
-
             </div>
 
-           
           </div>
-
+          
           <div class="col-12 col-md-12 col-lg-6">
-
             <div class="box border p-3 rounded-2 ">
               <h4 class="text-center">Contatta l'host</h4 class="text-center">
-
               <ContactForm></ContactForm>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
       <!-- <div class="p-3">
         <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contatta l' host</router-link>
       </div> -->
-
     </div>
 
     <!-- Caricamento -->
@@ -178,11 +154,8 @@ export default {
         <span class="visually-hidden text-white">Loading...</span>
       </div>
     </div>
-
   </div>
-
 </template>
-
 
 <style lang="scss">
 .single-image {
