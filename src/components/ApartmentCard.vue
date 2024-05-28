@@ -47,6 +47,8 @@ export default {
       <img :src="apartment.image == null ? '/public/No-Image-Placeholder.svg.png' : 'http://127.0.0.1:8000/storage/' + apartment.image" alt="Listing Image">
       <span class="distance"><i class="fa-solid fa-person-walking me-2"></i>{{apartment.distance.toFixed(2)}}km</span>
 
+      <i v-show="apartment.apartment_id != null" class="fa-solid fa-crown sponsor"></i>
+
       <div class="overlay">
         <div class="d-flex h-100 align-items-end">
 
@@ -101,6 +103,16 @@ export default {
     color:#3f8d8e;
     
     background-color: white;
+  }
+
+  .sponsor{
+    position:absolute;
+    top:0;
+    right:0;
+    
+    transform:  scale(170%) translate(5px, -5px) rotateZ(45deg);
+
+    color:#FFD700;
   }
   
   .overlay {
