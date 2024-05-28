@@ -23,7 +23,11 @@ export default {
 
     },
     methods:{
-       
+      catchId(id) {
+        store.idMessage = ''
+        store.idMessage = id
+        // console.log(store.idMessage)
+      },
     },
     
     mounted(){
@@ -42,7 +46,7 @@ export default {
   
   
   <div class="card-box bg-warning p-0">
-  <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class=" text-decoration-none">
+  <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class=" text-decoration-none" @click="catchId(apartment.id)">
       
       <img :src="apartment.image == null ? '/public/No-Image-Placeholder.svg.png' : 'http://127.0.0.1:8000/storage/' + apartment.image" alt="Listing Image">
       <span class="distance"><i class="fa-solid fa-person-walking me-2"></i>{{apartment.distance.toFixed(2)}}km</span>
