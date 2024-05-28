@@ -84,7 +84,7 @@ export default {
   
   <div class="container">
     
-    <div id="search-bar-wrapper" class="col-sm-8 col-lg-5">
+    <div id="search-bar-wrapper" class="col-12 col-sm-8 col-lg-5">
       
       <div id="search-icon">
         <i class="fa-solid fa-house"></i>
@@ -172,6 +172,19 @@ export default {
         outline:none;
         border-bottom:1px solid black;
       }
+  }
+
+}
+
+
+@media screen and (max-width:400px) {
+  #search-bar-wrapper{
+
+    padding:15px 25px;
+
+    .search-input{
+      width:100px;
+    }
   }
 
 }

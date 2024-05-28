@@ -82,7 +82,6 @@ export default {
 
         <div id="inner" class="col-12 col-lg-8 col-md-10">
 
-            <h2 class="mb-3 text-center">Filtri </h2>
             <div id="top-bar" class="row">
                 <div id="range" class="col-12 col-lg-4 d-flex flex-column">
                     <label for="radius" class="mb-3"><strong>Filtro di distanza:</strong> {{ radius }}km</label>
@@ -212,6 +211,27 @@ input:checked+.service-btn {
 
 #apartment-info > div:nth-of-type(2n + 2){
     padding-right: 0;
+}
+
+
+@media screen and (max-width:430px){
+
+    .filter-wrapper{
+
+        #services-filter{
+
+            flex-wrap: wrap;
+            justify-content: center;
+
+            column-gap:40px;
+    
+          
+    
+            &>div{
+                width: 38px;
+            }
+        }
+    }
 }
 
 
