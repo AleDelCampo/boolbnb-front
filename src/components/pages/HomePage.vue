@@ -9,6 +9,7 @@ export default {
     return {
       baseApiUrl: 'http://127.0.0.1:8000/api/',
       store,
+      
 
       
     };
@@ -55,6 +56,7 @@ export default {
       class="col-12 col-sm-6 col-md-4 col-lg-3"     
       v-for="currentApartment in store.apartments"
       :apartment="currentApartment"
+      :showDistance="false"
       :key="currentApartment.slug"
       ></ApartmentCard>
 
