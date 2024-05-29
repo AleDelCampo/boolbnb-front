@@ -1,10 +1,8 @@
 <script>
-
 import { store } from '../store';
 
-
 export default {
-    name: 'ApartmentCard',
+  name: 'ApartmentCard',
 
     props:{
         apartment: Object,
@@ -12,39 +10,21 @@ export default {
         
     },
 
-    data() {
-        return {
-            store,
-            
-            
-        }
-    },
-    
-    components: {
-
-    },
-    methods:{
-       
-    },
-    
-    mounted(){
-
-      console.log('vista',store.apartments)
-
-        
-
-        
+  data() {
+    return {
+      store,
     }
+  },
+
+  mounted() {
+    console.log('vista', store.apartments);
+  }
 }
 </script>
 
-
 <template>
-  
-  
   <div class="card-box bg-warning p-0">
-  <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class=" text-decoration-none">
-      
+    <router-link :to="{ name: 'single-apartment', params: { slug: apartment.slug } }" class="text-decoration-none">
       <img :src="apartment.image == null ? '/public/No-Image-Placeholder.svg.png' : 'http://127.0.0.1:8000/storage/' + apartment.image" alt="Listing Image">
       <span v-if="showDistance == true" class="distance"><i class="fa-solid fa-person-walking me-2"></i>{{apartment.distance.toFixed(2)}}km</span>
 
@@ -52,20 +32,13 @@ export default {
 
       <div class="overlay">
         <div class="d-flex h-100 align-items-end">
-
           <p class="p-3 text-white font-weight">{{ apartment.address }}</p>
-
         </div>
-
-
       </div>
-
     
-      <h6 class="text-center p-2  my_title">{{ apartment.title }}</h6>
+      <h6 class="text-center p-2 my_title">{{ apartment.title }}</h6>
     </router-link>
   </div>
-    
-
 </template>
 
 <style lang="scss" scoped>

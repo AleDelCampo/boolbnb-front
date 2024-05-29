@@ -6,14 +6,15 @@ import FilterSearchBar from '../FilterSearchBar.vue';
 import ApartmentCard from '../ApartmentCard.vue';
 
 export default {
-    name: 'SearchPage',
+
+  name: 'SearchPage',
 
   data() {
     return {
       baseApiUrl: 'http://127.0.0.1:8000/api/',
       store,
-
     }
+
   },
 
   components: {
@@ -21,15 +22,21 @@ export default {
     FilterSearchBar,
     ApartmentCard
   },
-  methods: {
-
-  
-  },
 
   mounted() {
-
-
-  },
+    
+    axios.get(this.baseApiUrl + 'search-endpoint', {
+      params: { /* parametri di ricerca */ }
+    })
+    .then(res => {
+      // Memorizza i risultati degli appartamenti nello store
+      this.store.apartments = res.data.results;
+      console.log(res);
+    })
+    .catch(error => {
+      console.error('Errore durante la ricerca degli appartamenti:', error);
+    });
+  }
 }
 </script>
 
@@ -40,7 +47,6 @@ export default {
       <SearchBar></SearchBar>
       <FilterSearchBar></FilterSearchBar>
     </div>
-    
 
     <div class="row row-gap-5 gap-4 justify-content-center pb-4 mt-1 mb-5">
       <ApartmentCard  
@@ -50,9 +56,8 @@ export default {
       :showDistance="true"
       :key="currentApartment.slug"
       ></ApartmentCard>
-
     </div>
-    
+
   </div>
 </template>
 
