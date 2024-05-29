@@ -54,7 +54,6 @@ export default {
         v-for="currentApartment in store.apartments"
         :apartment="currentApartment"
         :key="currentApartment.slug"
-        :showDistance="true"
       ></ApartmentCard>
     </div>
 
