@@ -44,24 +44,30 @@ export default {
 <form @submit.prevent="sendContactRequest()">
 
     <div class="mb-3">
-      <label for="name" class="form-label">Nome</label>
+      <label for="name" class="form-label">Nome *</label>
       <input type="text" class="form-control" id="name" name="name" v-model="formData.name" required>
     </div>
 
     <div class="mb-3">
-      <label for="surname" class="form-label">Cognome</label>
+      <label for="surname" class="form-label">Cognome *</label>
       <input type="text" class="form-control" id="surname" name="surname" v-model="formData.surname" required>
     </div>
 
     <div class="mb-3">
-        <label for="mail_address" class="form-label">Indirizzo email</label>
+        <label for="mail_address" class="form-label">Indirizzo email *</label>
         <input type="email" class="form-control" id="mail_address" name="mail_address" aria-describedby="emailHelp" v-model="formData.mail_address" required>
         <div id="emailHelp" class="form-text">Non condivideremo la tua mail con terzi.</div>
     </div>
 
     <div class="form-floating mb-3">
         <textarea class="form-control" placeholder="Inserisci il tuo messaggio" id="message" style="height: 200px;" v-model="formData.message" required></textarea>
-        <label for="message">Messaggio</label>
+        <label for="message">Messaggio *</label>
+    </div>
+
+    <div>
+      <p><small>
+        (*)Campo obbligatorio
+      </small></p>
     </div>
 
     <div class="d-flex justify-content-end py-3 pe-5 ">
