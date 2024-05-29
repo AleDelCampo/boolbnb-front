@@ -160,6 +160,7 @@ export default {
 
 
     #services-filter{
+        width: 100%;
         display: flex;
         justify-content: space-evenly;
 
@@ -219,16 +220,17 @@ input:checked+.service-btn {
     .filter-wrapper{
 
         #services-filter{
-
-            flex-wrap: wrap;
-            justify-content: center;
-
-            column-gap:40px;
+            position:relative;
+            justify-content: space-between;
     
+            overflow: auto;
+            gap:10px;
           
     
-            &>div{
-                width: 38px;
+            &>div>label>div[class="name"]{
+                flex-shrink:0;
+                text-align: center;
+                width: 80px;
             }
         }
     }
