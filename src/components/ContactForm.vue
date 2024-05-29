@@ -2,46 +2,57 @@
 import axios from 'axios';
 import { store } from '../store';
 
-
 export default {
   name: 'ContactForm',
 
   data() {
     return {
       store,
-
-        formData: {
-            name: '',
-            surname: '',
-            mail_address: '',
-            message: '',
-            apartment_id: store.idMessage,
-        },
+      formData: {
+        name: '',
+        surname: '',
+        mail_address: '',
+        message: '',
+        apartment_id: store.idMessage,
+      },
+      successMessage: '', // Stato per gestire il messaggio di successo
     }
   },
 
-  mounted() {
-
-
+  methods: {
+    sendContactRequest() {
+      axios.post('http://127.0.0.1:8000/api/new-contact', this.formData)
+        .then(res => {
+          this.successMessage = 'Messaggio inviato con successo!'; // Imposta il messaggio di successo
+          this.resetForm(); // Resetta il form
+        })
+        .catch(error => {
+          console.error(error);
+          this.successMessage = 'Si è verificato un errore durante l\'invio del messaggio.'; // Gestione degli errori
+        });
     },
 
-  methods: {
-        sendContactRequest() {
-
-            // console.log('Inviato')
-            axios.post('http://127.0.0.1:8000/api/new-contact', this.formData).then(res => {
-                console.log(res)
-            });
-        },
-       
+    resetForm() {
+      // Resetta i dati del form
+      this.formData = {
+        name: '',
+        surname: '',
+        mail_address: '',
+        message: '',
+        apartment_id: store.idMessage,
+      };
     }
+  }
 }
 </script>
 
-
 <template>
 
-<form @submit.prevent="sendContactRequest()">
+  <form @submit.prevent="sendContactRequest()">
+
+    <div v-if="successMessage" class="alert alert-success" role="alert">
+      {{ successMessage }}
+    </div>
 
     <div class="mb-3">
       <label for="name" class="form-label">Nome</label>
@@ -54,26 +65,23 @@ export default {
     </div>
 
     <div class="mb-3">
-        <label for="mail_address" class="form-label">Indirizzo email</label>
-        <input type="email" class="form-control" id="mail_address" name="mail_address" aria-describedby="emailHelp" v-model="formData.mail_address" required>
-        <div id="emailHelp" class="form-text">Non condivideremo la tua mail con terzi.</div>
+      <label for="mail_address" class="form-label">Indirizzo email</label>
+      <input type="email" class="form-control" id="mail_address" name="mail_address" aria-describedby="emailHelp" v-model="formData.mail_address" required>
+      <div id="emailHelp" class="form-text">Non condivideremo la tua mail con terzi.</div>
     </div>
 
     <div class="form-floating mb-3">
-        <textarea class="form-control" placeholder="Inserisci il tuo messaggio" id="message" style="height: 200px;" v-model="formData.message" required></textarea>
-        <label for="message">Messaggio</label>
+      <textarea class="form-control" placeholder="Inserisci il tuo messaggio" id="message" style="height: 200px;" v-model="formData.message" required></textarea>
+      <label for="message">Messaggio</label>
     </div>
 
-    <div class="d-flex justify-content-end py-3 pe-5 ">
+    <div class="d-flex justify-content-end py-3 pe-5">
       <button type="submit" class="router cta link-be"><strong>Invia</strong><span><i class="fa-solid fa-arrow-right"></i></span></button>
-
     </div>
 
-
-</form>
+  </form>
 
 </template>
-
 
 <style lang="scss" scoped>
 
