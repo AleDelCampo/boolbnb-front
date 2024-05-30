@@ -6,6 +6,7 @@ import SingleApartment from './components/pages/SingleApartment.vue';
 import SearchBar from './components/SearchBar.vue';
 import SearchPage from './components/pages/SearchPage.vue';
 import ContactMe from './components/pages/ContactMe.vue';
+import InEvidence from './components/pages/InEvidence.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -31,7 +32,11 @@ const router = createRouter({
             name: 'contact-me',
             component: ContactMe
         },
-
+        {
+            path: '/inevidence',
+            name: 'InEvidence',
+            component: InEvidence
+        },
        
 
     ]

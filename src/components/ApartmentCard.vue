@@ -1,43 +1,42 @@
 <script>
-import { store } from '../store';
+import { store } from '../store.js';
 
 export default {
   name: 'ApartmentCard',
 
-    props:{
-        apartment: Object,
-        showDistance:Boolean,
-        
+  props: {
+    apartment: Object,
+    showDistance: Boolean,
+  },
+
+  data() {
+    return {
+      store,
+    };
+  },
+
+  methods: {
+    catchId(id) {
+      store.idMessage = '';
+      store.idMessage = id;
     },
-
-    data() {
-        return {
-            store,
-            
-            
-        }
+    handlePopState() {
+      // Forza il refresh della pagina quando si torna indietro utilizzando la freccia del browser
+      location.reload();
     },
-    
-    components: {
+  },
 
-    },
-    methods:{
-      catchId(id) {
-        store.idMessage = ''
-        store.idMessage = id
-        // console.log(store.idMessage)
-      },
-    },
-    
-    mounted(){
+  mounted() {
+    console.log('vista', store.apartments);
+    // Aggiungi un listener per l'evento popstate per gestire il ritorno indietro del browser
+    window.addEventListener('popstate', this.handlePopState);
+  },
 
-      console.log('vista',store.apartments)
-
-        
-
-        
-    }
-}
+  beforeReset() {
+    // Rimuovi il listener per l'evento popstate prima di resettare il componente
+    window.removeEventListener('popstate', this.handlePopState);
+  },
+};
 </script>
 
 <template>
