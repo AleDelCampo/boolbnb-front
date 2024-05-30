@@ -36,12 +36,7 @@ export default {
                                         
                         </li>
                         <li>
-                            <router-link class="router line" :to="{}">
-                                Contatti
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link class="router line" :to="{}">
+                            <router-link class="router line" :to="{ name: 'InEvidence'}">
                                 In Evidenza
                             </router-link>
                         </li>
