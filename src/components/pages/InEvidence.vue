@@ -26,6 +26,12 @@ export default {
       params: { latitude: "41.89056", longitude: "12.49427", radius: "20000" }
     })
     .then(res => {
+
+      for(let i=1; i<res.data.results.length;i++){
+        if(res.data.results[i].id == res.data.results[i-1].id){
+          res.data.results.splice(i,1);
+        }
+      }
       this.store.apartments = res.data.results;
       console.log(res);
     })
