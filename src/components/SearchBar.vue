@@ -67,8 +67,17 @@ export default {
         })
           .then(res => {
             // Memorizza i risultati degli appartamenti nello store
+            
+            for(let i=1; i<res.data.results.length;i++){
+              if(res.data.results[i].id == res.data.results[i-1].id){
+                res.data.results.splice(i,1);
+              }
+            }
+            
             this.store.apartments = res.data.results;
-            console.log(res);
+
+
+            console.log(this.store.apartments);
           })
           .catch(error => {
             console.error('Errore durante la ricerca degli appartamenti:', error);
