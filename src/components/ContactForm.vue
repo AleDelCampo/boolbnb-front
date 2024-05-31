@@ -1,5 +1,4 @@
 <script>
-
 import axios from 'axios';
 import { store } from '../store';
 
@@ -17,6 +16,7 @@ export default {
         apartment_id: store.idMessage,
       },
       successMessage: '',
+      errorMessage: '', // Proprietà per gestire il messaggio di errore
       loading: false, // Stato per gestire il loader
     }
   },
@@ -24,6 +24,8 @@ export default {
   methods: {
     sendContactRequest() {
       this.loading = true; // Mostra il loader
+      this.successMessage = ''; // Resetta il messaggio di successo
+      this.errorMessage = ''; // Resetta il messaggio di errore
       axios.post('http://127.0.0.1:8000/api/new-contact', this.formData)
         .then(res => {
           this.successMessage = 'Messaggio inviato con successo!';
@@ -31,7 +33,7 @@ export default {
         })
         .catch(error => {
           console.error(error);
-          this.successMessage = 'Si è verificato un errore durante l\'invio del messaggio.';
+          this.errorMessage = 'Si è verificato un errore durante l\'invio del messaggio.';
         })
         .finally(() => {
           this.loading = false; // Nasconde il loader
@@ -57,6 +59,10 @@ export default {
     <form v-else @submit.prevent="sendContactRequest()">
       <div v-if="successMessage" class="alert alert-success" role="alert">
         {{ successMessage }}
+      </div>
+
+      <div v-if="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
       </div>
 
       <div class="mb-3">
@@ -120,5 +126,11 @@ export default {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 </style>
