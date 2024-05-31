@@ -85,15 +85,14 @@ export default {
   top: -14px;
   left: 40px;
   border-radius: 20px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 10px;
   background-color: #eaf2f3;
   color: #3f8d8e;
   font-weight: bold;
   font-size: 1.2em;
   border: 1px solid #3f8d8e;
   text-align: center;
-  width: 14%;
+  width: auto;
 }
 
 .my-card {
