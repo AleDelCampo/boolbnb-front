@@ -4,27 +4,12 @@ export default {
 
     data() {
         return {
-            members: [
-                {
-                    nome: "Andrea",
-                    cognome: "Livornese"
-                },
-                {
-                    nome: "Alberto",
-                    cognome: "Taddeucci"
-                },
-                {
-                    nome: "Alessandro",
-                    cognome: "Del Campo"
-                },
-                {
-                    nome: "Giuseppe",
-                    cognome: "Trapasso"
-                },
-                {
-                    nome: "Pool",
-                    cognome: "Gutierrez"
-                },
+            servizios: [
+                "Autonoleggio",
+                "Escursioni",
+                "Ricerca Voli",
+                "Ricerca Ristoranti",
+                "Agevolazioni Vacanze"
             ],
 
             emails: [
@@ -57,15 +42,14 @@ export default {
             <div class="row row-gap-4">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="col-title text-center text-md-start">
-                        <span>Membri</span>
+                        <span>Servizi</span>
                     </div>
         
                     <div class="components text-center text-md-start">
                         <ul>
-                            <li v-for="member in members">
+                            <li v-for="servizio in servizios">
                                 <div class="name">
-                                    {{ member.nome }}
-                                    {{ member.cognome }}
+                                    {{ servizio }}
                                 </div>
                             </li>
                         </ul>
