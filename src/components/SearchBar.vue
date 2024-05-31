@@ -71,6 +71,7 @@ export default {
             for(let i=1; i<res.data.results.length;i++){
               if(res.data.results[i].id == res.data.results[i-1].id){
                 res.data.results.splice(i,1);
+                i--;
               }
             }
             
