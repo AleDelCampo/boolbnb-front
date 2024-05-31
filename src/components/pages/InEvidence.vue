@@ -41,7 +41,7 @@ export default {
   <div>
     <h1 class="text-center mb-5 mt-3">Appartamenti In Evidenza</h1>
 
-    <div class="container my-card">
+    <div class="container my-card mb-5">
 
       <div class="row row-gap-5 gap-5 justify-content-center mt-1 mb-5">
 
