@@ -100,7 +100,7 @@ export default {
                 <p class="text-center"><strong class="separator">{{ apartment.n_bathrooms }}</strong> bagni</p>
               </div>
               <div class="col-3 p-0">
-                <p class="text-center"><strong>{{ apartment.squared_meters }} </strong> m^2</p>
+                <p class="text-center"><strong>{{ apartment.squared_meters }} </strong> m²</p>
               </div>
             </div>
 
@@ -123,7 +123,7 @@ export default {
               <p><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong>{{ apartment.user_name }} {{ apartment.user_surname }}</p>
             </div>
 
-            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> No owner information available</p>
+            <p v-else><strong class="text host"><i class="fa-solid fa-house-user"></i> Host</strong> Nessuna informazione disponibile</p>
 
             <hr>
 
@@ -143,9 +143,7 @@ export default {
           </div>
         </div>
       </div>
-      <!-- <div class="p-3">
-        <router-link :to="{name: 'contact-me'}" class="btn my_btn" @click="catchId(apartment.id)">Contatta l' host</router-link>
-      </div> -->
+      
     </div>
 
     <!-- Caricamento -->
@@ -160,7 +158,9 @@ export default {
 <style lang="scss">
 .single-image {
   object-fit: cover;
-  height: 300px;
+  object-position: bottom;
+  width: 100%;
+  // height: 400px;
 }
 
 .border-color {
@@ -190,5 +190,26 @@ p {
 .host {
   margin-right: 1em;
   border-bottom: 2px solid #006769c0;
+}
+
+@media screen and (min-width: 768px){
+
+  .single-image{
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 768px){
+
+.single-image{
+  height: 300px;
+}
+}
+
+@media screen and (min-width: 998px){
+
+.single-image{
+  height: 400px;
+}
 }
 </style>

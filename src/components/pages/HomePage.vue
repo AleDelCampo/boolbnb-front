@@ -62,18 +62,18 @@ export default {
   <Jumbo></Jumbo>
 
   <div class="container">
-    <div class="row row-gap-5 gap-5 justify-content-center pb-4 mt-1 mb-5 my-card position-relative">
+    <div class="row row-gap-5 gap-4 justify-content-center pt-5 pb-4 mt-1 mb-5 my-card position-relative">
       <div id="my-title">
-        Sponsorizzati
+        IN EVIDENZA
       </div>
 
       <ApartmentCard class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" v-for="currentApartment in paginatedApartments"
         :apartment="currentApartment" :showDistance="false" :key="currentApartment.slug"></ApartmentCard>
 
       <div class="pagination">
-        <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">Previous</button>
-        <span class="fw-bolder">{{ currentPage }} / {{ totalPages }}</span>
-        <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">Next</button>
+        <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1"><i class="fa-solid fa-arrow-left "></i></button>
+        <span class="fw-bolder ms-3 me-3">{{ currentPage }} / {{ totalPages }}</span>
+        <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages"><i class="fa-solid fa-arrow-right"></i></button>
       </div>
     </div>
   </div>
@@ -82,22 +82,20 @@ export default {
 <style lang="scss" scoped>
 #my-title {
   position: absolute;
-  top: -14px;
+  top: -20px;
   left: 40px;
-  border-radius: 20px;
-  padding: 4px 10px;
-  background-color: #eaf2f3;
+  border-radius: 10px;
+  padding: 8px 20px;
+  background-color: #c8eced;
   color: #3f8d8e;
   font-weight: bold;
   font-size: 1.2em;
-  border: 1px solid #3f8d8e;
   text-align: center;
   width: auto;
 }
 
 .my-card {
-  padding: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #eaf2f3;
 }
 
@@ -109,7 +107,7 @@ export default {
 }
 
 .pagination button {
-  border: 1px solid #006769c0;
+  border: 0px solid #006769c0;
   background-color: white;
   font-weight: bold;
   color: #006769c0;
@@ -117,7 +115,6 @@ export default {
   border-radius: 20px;
 
   &:hover {
-    border: 1px solid white;
     background-color: #006769c0;
     color: white;
   }
