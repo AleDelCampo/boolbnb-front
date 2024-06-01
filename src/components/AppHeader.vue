@@ -14,8 +14,8 @@ export default {
 
 <template>
 
-    <header>
-        <nav class="navbar navbar-expand-lg">
+    <header class="mb-5">
+        <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container">
                 <a class="navbar-brand me-5" href="#">
                     <router-link :to="{ name: 'HomePage' }">
