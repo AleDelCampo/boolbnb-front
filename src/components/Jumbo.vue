@@ -93,6 +93,8 @@ export default {
 #jumbo{
 
     position: relative;
+
+    height: 600px;
     
     background-repeat: no-repeat;
     background-size: cover;

@@ -91,7 +91,7 @@ export default {
         <div id="inner" class="col-12 col-lg-8 col-md-10">
 
             <div id="top-bar" class="row">
-                <div id="range" class="col-12 col-lg-4 d-flex flex-column">
+                <div id="range" class="col-12 col-lg-4 d-flex flex-column pb-1">
                     <label for="radius" class="mb-3"><strong>Filtro di distanza:</strong> {{ radius }}km</label>
                     <input type="range" id="radius" min="1" max="30"  v-model="radius" @change="filterApartments">
     
@@ -99,33 +99,33 @@ export default {
     
                 <div id="apartment-info" class=" col-12 col-lg-8 row row-cols-2 m-0">
                     <div class="d-flex flex-column">
-                        <label for="">Stanze</label>
+                        <label for="" class="p-1 fw-bold">Stanze</label>
                         <input type="number" class="info-input" v-model="store.inputRooms" @input="filterApartments" >
                     </div>
                 
                     <div class="d-flex flex-column">
-                        <label for="">Letti</label>
+                        <label for="" class="p-1 fw-bold">Letti</label>
                         <input type="number" class="info-input" v-model="store.inputBeds" @input="filterApartments" >
                     </div>
                 
                     <div class="d-flex flex-column">
-                        <label for="">Bagni</label>
+                        <label for="" class="p-1 fw-bold">Bagni</label>
                         <input type="number" class="info-input" v-model="store.inputBathrooms" @input="filterApartments" >
                     </div>
                 
                     <div class="d-flex flex-column">
-                        <label for="">Grandezza(mq)</label>
+                        <label for="" class="p-1 fw-bold">Grandezza (m²)</label>
                         <input type="number" class="info-input" v-model="store.inputSquaredMeters" @input="filterApartments" >
                     </div>
                 </div>
             </div>
     
-            <div id="bottom-bar">
+            <div id="bottom-bar" class="mt-2">
                 <div id="services">
     
-                    <strong class="mb-3">Servizi disponibili</strong>
+                    <strong class="mb-3 p-1">Servizi disponibili</strong>
                     <div id="services-filter">
-                        <div v-for="service in serviceList">
+                        <div class="pt-2" v-for="service in serviceList">
                             <input  type="checkbox" class="btn-check prova" name="services[]" :id="`service-${service.id}`" :value="service.id" @change="toggleService(service.id)"> 
                             <label :for="`service-${service.id}`" class="service-btn label-btn" >
                                 <div class="icon">

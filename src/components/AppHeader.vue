@@ -29,8 +29,8 @@ export default {
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse align-items-center" id="navbarNav">
-                    <ul class="navbar-nav ms-3 me-auto my-2 my-lg-0 gap-lg-4 " style="--bs-scroll-height: 100px;">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-3 me-auto my-2 my-lg-0 gap-lg-4 " style="--bs-scroll-height: 100px;">
                         <li>
                             <router-link class="router line" :to="{ name: 'HomePage' }">
                                 Home
@@ -45,7 +45,7 @@ export default {
                     </ul>
                     <div id="reg-log">
 
-                        <ul class="navbar-nav ms-3 me-auto my-2 my-lg-0" style="--bs-scroll-height: 100px;">
+                        <ul class="navbar-nav ms-lg-3 me-auto my-2 my-lg-0" style="--bs-scroll-height: 100px;">
                             <li>
                                 <a class="router link-be" href="http://127.0.0.1:8000/login">Accedi
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
@@ -63,9 +63,6 @@ export default {
 
                         </ul>
 
-                        <!-- <div id="reg-log-inner">
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>
