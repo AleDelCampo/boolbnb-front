@@ -160,7 +160,7 @@ export default {
   object-fit: cover;
   object-position: bottom;
   width: 100%;
-  height: 400px;
+  // height: 400px;
 }
 
 .border-color {
@@ -190,5 +190,26 @@ p {
 .host {
   margin-right: 1em;
   border-bottom: 2px solid #006769c0;
+}
+
+@media screen and (min-width: 768px){
+
+  .single-image{
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 768px){
+
+.single-image{
+  height: 300px;
+}
+}
+
+@media screen and (min-width: 998px){
+
+.single-image{
+  height: 400px;
+}
 }
 </style>
