@@ -30,7 +30,7 @@ export default {
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-lg-3 me-auto my-2 my-lg-0 gap-lg-4 " style="--bs-scroll-height: 100px;">
+                    <ul class="navbar-nav ms-lg-3 me-auto my-2 my-lg-0 gap-lg-4" style="--bs-scroll-height: 100px;">
                         <li>
                             <router-link class="router line" :to="{ name: 'HomePage' }">
                                 Home
@@ -54,7 +54,7 @@ export default {
 
 
                             </li>
-                            <li>
+                            <li class="ms-lg-3">
                                 <a class="router link-be" href="http://127.0.0.1:8000/register">Registrati
                                     <span><i class="fa-solid fa-arrow-right"></i></span>
                                 </a>
@@ -89,7 +89,6 @@ nav {
 
             display: flex;
             font-weight: bold;
-            align-items: center;
             list-style-type: none;
 
             li {

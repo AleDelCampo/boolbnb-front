@@ -9,23 +9,21 @@ export default {
         return {
             slide: [
                 {
-                image:"public/jumbo-images/casa-vacanza-jumbo.jpg",
+                image:"public/jumbo-images/img-3.jpg",
                 title:"Un nuovo viaggio ti aspetta",
                 text:"Immergiti nella grande varietà di appartamenti disposti su tutto il territorio nazionale. Imposta la posizione e le tue esigenze e scegli l'appartamento per te."
             },
             {
-                image:"public/jumbo-images/casa-jumbo.jpg",
+                image:"public/jumbo-images/img-1.jpg",
                 title:"Sempre con te per aiutarti",
-                text:"Immergiti nella grande varietà di appartamenti disposti su tutto il territorio nazionale. Imposta la posizione e le tue esigenze e scegli l'appartamento per te."
+                text:"Ogni viaggio è un'opportunità per esplorare nuovi luoghi, assaporare cibi unici e incontrare persone affascinanti che possono cambiare il tuo modo di vedere il mondo."
             },
             {
-                image:"public/jumbo-images/sole_jumbo.jpg",
+                image:"public/jumbo-images/img-2.jpg",
                 title:"Pronto per una nuova avventura?",
-                text:"Immergiti nella grande varietà di appartamenti disposti su tutto il territorio nazionale. Imposta la posizione e le tue esigenze e scegli l'appartamento per te."
+                text:"Che tu scelga una spiaggia paradisiaca, una città storica o un sentiero di montagna, ogni destinazione ha qualcosa di speciale da offrire e ti regalerà ricordi che dureranno per sempre."
             },
-                // 'public/jumbo-images/casa-vacanza-jumbo.jpg',
-                // 'public/jumbo-images/casa-jumbo.jpg',
-                // 'public/jumbo-images/sole_jumbo.jpg',
+               
             ],
 
             slideIndex: 0,
@@ -65,7 +63,7 @@ export default {
     
                     <div id="left-side" class="col-6">
             
-                        <h1 class="p-3 slide-left" >
+                        <h1 class="p-3 slide-left text-white" >
                             {{currentSlide.title}}
                         </h1>
                         <p class="p-3 slide-left-r">
@@ -124,10 +122,7 @@ export default {
             position: relative;
 
             h1 {
-                // z-index: 1;   
-               
                 font-size: 3.3em;
-                color: black;
                 
 
                 &.slide-left {
